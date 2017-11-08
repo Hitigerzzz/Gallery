@@ -1,0 +1,76 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.container {
+  width: 800px;
+  background-color: white;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    height: 60px;
+    margin: 10px 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: $white-color;
+
+    .avatar_wrapper {
+      width: 50px;
+      height: 50px;
+
+      img {
+        @include cover-img;
+        border-radius: 50%;
+      }
+    }
+
+    .post_origin {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .username {
+        font-size: $base-font-size;
+        color: $theme-purple-color-light;
+        font-weight: $font-weight-bold;
+      }
+
+      .post_time {
+        font-size: $small-font-size;
+        color: $gray-color-dark;
+        font-weight: $font-weight-medium;
+      }
+
+    }
+  }
+
+  .body {
+    display: block;
+    background-color: $white-color;
+    font-size: 0;
+    cursor: -webkit-zoom-in;
+    text-align: center;
+
+    img {
+      max-height: 625px;
+      max-width: 100%;
+      pointer-events: none;
+      margin: 0 auto;
+    }
+  }
+
+  .footer {
+
+    .footer_header {
+
+    }
+
+    .footer_description {
+
+    }
+  }
+}
+
