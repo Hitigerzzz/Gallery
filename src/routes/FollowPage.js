@@ -1,3 +1,6 @@
+/**
+ * Created by Hitigerzzz on 2017/11/8.
+ */
 import React from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';

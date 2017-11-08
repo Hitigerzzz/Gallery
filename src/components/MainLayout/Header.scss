@@ -1,0 +1,110 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.header {
+  background-color: $white-color;
+  border-bottom: 1px solid $gray-color-light;
+  padding-bottom: 1px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  .menu {
+    border-bottom: none;
+
+    :global {
+      .ant-menu-item {
+        border-bottom: none;
+        height: 50px;
+        line-height: 50px;
+        a {
+          color: $gray-color-dark;
+          font-size: $small-font-size;
+          font-family: $theme-font-family;
+          //font-weight: $font-weight-medium;
+        }
+        //a:hover {
+        //  color: $white-color;
+        //}
+        &.ant-menu-item-active {
+          border-bottom: none;
+          background-color: $theme-purple-color-ultra-light;
+        }
+        &.ant-menu-item-selected {
+          border-bottom: none;
+          background-color: lighten($theme-purple-color-medium-light, 10%);
+        }
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+
+    .submenu {
+      display: flex;
+      align-self: center;
+      border-bottom: none;
+      align-items: center;
+
+      .avatar {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+      }
+
+      :global {
+        .ant-menu-submenu-title {
+          display: flex;
+          align-items: center;
+
+          a {
+            height: 25px;
+            line-height: 25px;
+          }
+        }
+
+        .ant-menu-sub {
+          top: 35px;
+          left: -80px;
+          z-index: 1050;
+
+          &:before {
+            z-index: 1;
+            content: '';
+            display: block;
+            position: absolute;
+            top: -7px;
+            right: 10px;
+            background-color: white;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+            width: 14px;
+            height: 14px;
+            @include transform(rotate(45deg));
+          }
+
+          &:after {
+            z-index: 99;
+            content: '';
+            display: block;
+            position: absolute;
+            top: -6px;
+            right: 8px;
+            background-color: white;
+            box-shadow: none;
+            border: none;
+            width: 18px;
+            height: 18px;
+            @include transform(rotate(45deg));
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+
