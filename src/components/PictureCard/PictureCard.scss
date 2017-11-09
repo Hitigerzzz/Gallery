@@ -20,6 +20,7 @@
     .avatar_wrapper {
       width: 50px;
       height: 50px;
+      margin-right: 12px;
 
       img {
         @include cover-img;
@@ -32,7 +33,7 @@
       flex-direction: column;
       justify-content: space-between;
 
-      .username {
+      .author_name {
         font-size: $base-font-size;
         color: $theme-purple-color-light;
         font-weight: $font-weight-bold;
@@ -44,6 +45,32 @@
         font-weight: $font-weight-medium;
       }
 
+    }
+
+    .follow {
+      margin-left: auto;
+      color: $theme-purple-color;
+      border-color: $theme-purple-color;
+    }
+
+    .following {
+      margin-left: auto;
+      color: $white-color;
+      background-color: $green-color;
+      border: $gray-border;
+
+      .following_hide {
+        display: none;
+      }
+      &:hover {
+        background-color: $red-color;
+      }
+      &:hover .following_show {
+        display: none;
+      }
+      &:hover .following_hide {
+        display: inline;
+      }
     }
   }
 
@@ -63,14 +90,60 @@
   }
 
   .footer {
+    padding: 15px;
+    text-align: left;
 
     .footer_header {
+      display: flex;
+      align-items: center;
 
+      h3 {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: $gray-color-ultra-dark;
+        font-size: $base-font-size;
+      }
+
+      .buttons {
+        color: $gray-color-ultra-dark;
+
+        button {
+          margin-left: 10px;
+
+          &:active {
+            border: $gray-border;
+            box-shadow: none;
+          }
+
+          &:focus {
+            border: $gray-border;
+            box-shadow: none;
+          }
+        }
+
+        .liked {
+          background-color: red;
+          color: $white-color;
+        }
+
+        .disliked {
+          i {
+            color: red;
+          }
+
+          span {
+            color: $gray-color-ultra-dark;
+          }
+        }
+      }
     }
 
     .footer_description {
-
+      margin-top: 10px;
+      font-size: $small-font-size;
+      color: $gray-color-dark;
     }
   }
 }
-
