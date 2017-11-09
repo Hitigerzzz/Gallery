@@ -5,12 +5,12 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
 import MainLayout from '../components/MainLayout/MainLayout';
-import PictureCard from '../components/PictureCard/PictureCard';
+import PictureCardList from '../components/PictureCard/PictureCardList';
 
 function IndexPage({ location }) {
   return (
     <MainLayout location={location}>
-      <PictureCard />
+      <PictureCardList />
     </MainLayout>
   );
 }

@@ -27,7 +27,9 @@
         border-radius: 50%;
       }
     }
-
+    .follow_btn {
+      margin-left: auto;
+    }
     .post_origin {
       display: flex;
       flex-direction: column;
@@ -45,32 +47,6 @@
         font-weight: $font-weight-medium;
       }
 
-    }
-
-    .follow {
-      margin-left: auto;
-      color: $theme-purple-color;
-      border-color: $theme-purple-color;
-    }
-
-    .following {
-      margin-left: auto;
-      color: $white-color;
-      background-color: $green-color;
-      border: $gray-border;
-
-      .following_hide {
-        display: none;
-      }
-      &:hover {
-        background-color: $red-color;
-      }
-      &:hover .following_show {
-        display: none;
-      }
-      &:hover .following_hide {
-        display: inline;
-      }
     }
   }
 
@@ -124,13 +100,13 @@
         }
 
         .liked {
-          background-color: red;
+          background-color: $red-color;
           color: $white-color;
         }
 
         .disliked {
           i {
-            color: red;
+            color: $red-color;
           }
 
           span {

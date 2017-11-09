@@ -2,46 +2,42 @@
  * Created by Hitigerzzz on 2017/11/8.
  */
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import styles from './PictureCard.css';
 import demo from '../../assets/img/wide.jpg';
 import avatar from '../../assets/img/jj.jpg';
+import PictureModal from '../PictureModal/PictureModal';
+import FollowBtn from '../FollowBtn/FollowBtn';
 
 class PictureCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLike: false,
-      isFollowing: false,
+      modalVisible: false,
     };
   }
-
+  setModalVisible(modalVisible) {
+    this.setState({ modalVisible });
+  }
   likePictureChange = () => {
     this.setState({
       isLike: !this.state.isLike,
     });
   };
 
-  /**
-   * 关注作者
-   */
-  followAuthor = () => {
-    this.setState({
-      isFollowing: true,
-    });
-  };
-  /**
-   * 取消关注
-   */
-  unfollowAuthor = () => {
-    this.setState({
-      isFollowing: false,
-    });
-  };
-
   render() {
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} ${this.props.className}`}>
+        <Modal
+          style={{ top: 20 }}
+          visible={this.state.modalVisible}
+          footer={null}
+          width={'96%'}
+          onCancel={() => this.setModalVisible(false)}
+        >
+          <PictureModal img={demo} />
+        </Modal>
         <div className={styles.header}>
           <div className={styles.avatar_wrapper}>
             <img alt="avatar" src={avatar} />
@@ -50,14 +46,9 @@ class PictureCard extends React.Component {
             <a className={styles.author_name}>Faker</a>
             <p className={styles.post_time}>2017年10月21日 21:10</p>
           </div>
-          {this.state.isFollowing ?
-            <Button className={styles.following} onClick={this.unfollowAuthor}>
-              <span className={styles.following_show}>Following</span>
-              <span className={styles.following_hide}>Unfollow</span>
-            </Button>
-            : <Button className={styles.follow} onClick={this.followAuthor}>Follow</Button>}
+          <FollowBtn className={styles.follow_btn} />
         </div>
-        <a className={styles.body}>
+        <a className={styles.body} onClick={() => this.setModalVisible(true)}>
           <img alt="post" src={demo} />
         </a>
         <div className={styles.footer}>

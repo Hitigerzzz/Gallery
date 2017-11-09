@@ -1,0 +1,29 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.follow {
+  color: $theme-purple-color;
+  border-color: $theme-purple-color;
+}
+
+.following {
+  color: $white-color;
+  background-color: $green-color;
+  border: $gray-border;
+
+  .following_hide {
+    display: none;
+  }
+  &:hover {
+    color: $white-color;
+    background-color: $red-color;
+    border: $gray-border;
+  }
+  &:hover .following_show {
+    display: none;
+  }
+  &:hover .following_hide {
+    display: inline;
+  }
+}
