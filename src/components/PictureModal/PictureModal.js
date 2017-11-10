@@ -25,9 +25,9 @@ function PictureModal({ img }) {
           </div>
           <FollowBtn />
         </div>
-        <div className={styles.buttons}></div>
-        <div className={styles.description}></div>
-        <div className={styles.comment_list}></div>
+        <div className={styles.buttons} />
+        <div className={styles.description} />
+        <div className={styles.comment_list} />
       </div>
     </div>
   );

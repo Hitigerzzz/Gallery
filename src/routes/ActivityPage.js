@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
 import MainLayout from '../components/MainLayout/MainLayout';
+import FollowBtn from '../components/FollowBtn/FollowBtn';
 
 function IndexPage({ location }) {
   return (
     <MainLayout location={location}>
+      <FollowBtn />
       <div className={styles.normal}>
         <h1 className={styles.title}>Yay! Welcome to dva!</h1>
         <div className={styles.welcome} />

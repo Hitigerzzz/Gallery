@@ -2,28 +2,31 @@
 @import "../../assets/scss/variables";
 @import "../../assets/scss/base";
 
-.follow {
-  color: $theme-purple-color;
-  border-color: $theme-purple-color;
-}
-
-.following {
-  color: $white-color;
-  background-color: $green-color;
-  border: $gray-border;
-
-  .following_hide {
-    display: none;
+.container {
+  .follow {
+    color: $theme-purple-color;
+    border-color: $theme-purple-color;
   }
-  &:hover {
+
+  .following {
     color: $white-color;
-    background-color: $red-color;
+    background-color: $green-color;
     border: $gray-border;
-  }
-  &:hover .following_show {
-    display: none;
-  }
-  &:hover .following_hide {
-    display: inline;
+
+    .following_hide {
+      display: none;
+    }
+    &:hover {
+      color: $white-color;
+      background-color: $red-color;
+      border: $gray-border;
+    }
+    &:hover .following_show {
+      display: none;
+    }
+    &:hover .following_hide {
+      display: inline;
+    }
   }
 }
+

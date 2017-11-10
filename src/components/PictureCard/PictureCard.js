@@ -15,6 +15,7 @@ class PictureCard extends React.Component {
     this.state = {
       isLike: false,
       modalVisible: false,
+      isFollowing: false,
     };
   }
   setModalVisible(modalVisible) {
@@ -25,7 +26,22 @@ class PictureCard extends React.Component {
       isLike: !this.state.isLike,
     });
   };
-
+  /**
+   * 关注作者
+   */
+  followAuthor = () => {
+    this.setState({
+      isFollowing: true,
+    });
+  };
+  /**
+   * 取消关注
+   */
+  unfollowAuthor = () => {
+    this.setState({
+      isFollowing: false,
+    });
+  };
   render() {
     return (
       <div className={`${styles.container} ${this.props.className}`}>

@@ -9,7 +9,7 @@ class FollowBtn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFollowing: true,
+      isFollowing: false,
     };
   }
 
@@ -30,10 +30,9 @@ class FollowBtn extends React.Component {
     });
   };
   render() {
-    const isFollowing = this.state.isFollowing;
     return (
-      <div className={this.props.className}>
-        {isFollowing ?
+      <div className={`${styles.container} ${this.props.className}`}>
+        {this.state.isFollowing ?
           <Button className={styles.following} onClick={this.unfollowAuthor}>
             <span className={styles.following_show}>Following</span>
             <span className={styles.following_hide}>Unfollow</span>
