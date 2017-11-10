@@ -6,7 +6,7 @@ import { Button, Modal } from 'antd';
 import styles from './PictureCard.css';
 import demo from '../../assets/img/wide.jpg';
 import avatar from '../../assets/img/jj.jpg';
-import PictureModal from '../PictureModal/PictureModal';
+import PictureModal from '../PictureModalContent/PictureModalContent';
 import FollowBtn from '../FollowBtn/FollowBtn';
 
 class PictureCard extends React.Component {
@@ -69,8 +69,7 @@ class PictureCard extends React.Component {
         </a>
         <div className={styles.footer}>
           <div className={styles.footer_header}>
-            <h3>Helmcken Falls sunsetHelmcken Falls sunsetHelmcken Falls sunset
-              Helmcken Falls sunsetHelmcken Falls sunsetHelmcken Falls sunset</h3>
+            <h3>Helmcken Falls sunset</h3>
             <div className={styles.buttons}>
               <Button icon="message" />
               <Button icon="plus" />
