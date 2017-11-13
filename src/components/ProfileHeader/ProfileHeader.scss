@@ -1,0 +1,70 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+
+  .avatar_wrapper {
+    width: 150px;
+    height: 150px;
+    margin-right: 60px;
+
+    img {
+      @include cover-img;
+      border-radius: 50%;
+    }
+  }
+
+  .user_info {
+    display: flex;
+    flex-direction: column;
+
+    .first {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+
+      .username {
+        line-height: 1;
+        font-size: 40px;
+        font-weight: $font-weight-bold;
+        margin-right: 24px;
+        color: $gray-color-ultra-dark;
+      }
+    }
+
+    .second {
+      display: flex;
+      align-items: center;
+      font-size: $small-font-size;
+      color: $gray-color;
+      font-weight: $font-weight-medium;
+      margin-bottom: 8px;
+
+      div:not(:last-child) {
+        margin-right: 12px;
+
+        &:hover {
+          color: $theme-purple-color-light;
+          cursor: pointer;
+        }
+      }
+
+      div:last-child {
+        i {
+          margin-right: 4px;
+        }
+      }
+    }
+
+    .description {
+      color: $gray-color-ultra-dark;
+      font-size: $small-font-size;
+    }
+  }
+}

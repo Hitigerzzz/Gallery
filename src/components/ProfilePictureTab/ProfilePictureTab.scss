@@ -1,0 +1,41 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  :global {
+    .ant-tabs {
+      width: 1296px;
+
+      .ant-tabs-bar {
+        border-bottom: none;
+
+        .ant-tabs-nav {
+          .ant-tabs-ink-bar {
+            display: none !important;
+          }
+          .ant-tabs-tab {
+            text-align: left;
+            height: 36px;
+            line-height: 36px;
+            color: $gray-color;
+            font-size: $base-font-size;
+            padding: 0;
+
+            &.ant-tabs-tab-active {
+              color: $theme-purple-color-light;
+            }
+
+            &:hover {
+              color: $theme-purple-color-light;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

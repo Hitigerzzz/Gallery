@@ -5,6 +5,7 @@ import FollowPage from './routes/FollowPage';
 import ActivityPage from './routes/ActivityPage';
 import LikedPage from './routes/LikedPage';
 import MessagePage from './routes/MessagePage';
+import ProfilePage from './routes/ProfilePage';
 
 function RouterConfig({ history }) {
   return (
@@ -15,6 +16,7 @@ function RouterConfig({ history }) {
         <Route path="/activity" exact component={ActivityPage} />
         <Route path="/liked" exact component={LikedPage} />
         <Route path="/message" exact component={MessagePage} />
+        <Route path="/:userID" exact component={ProfilePage} />
       </Switch>
     </Router>
   );

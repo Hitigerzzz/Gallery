@@ -107,6 +107,16 @@ class PictureModal extends React.Component {
                 <div>2days ago</div>
               </div>
             </div>
+            <div className={styles.comment_item}>
+              <div className={styles.comment_avatar_wrapper}>
+                <img alt="comment-avatar" src={avatar} />
+              </div>
+              <div className={styles.comment_body}>
+                <span>Faker</span>
+                <p>Outstanding photograph my friend! Great colors as always!</p>
+                <div>2days ago</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
