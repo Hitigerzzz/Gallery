@@ -8,7 +8,7 @@
 
   :global {
     .ant-tabs {
-      width: 1296px;
+      width: 85%;
 
       .ant-tabs-bar {
         border-bottom: none;
@@ -36,6 +36,19 @@
         }
       }
 
+    }
+  }
+
+  .main_body {
+    display: flex;
+    justify-content: space-between;
+
+    .column {
+      width: calc(33.33% - 16px);
+
+      .item {
+        margin-bottom: 24px;
+      }
     }
   }
 }

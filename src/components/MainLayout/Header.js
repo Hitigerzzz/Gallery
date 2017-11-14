@@ -47,9 +47,16 @@ function Header({ location }) {
           mode="horizontal"
           className={styles.menu}
         >
-          <SubMenu key="avatar" title={<a><img alt="avatar" src={defaultAvatar} className={styles.avatar} /></a>} className={styles.submenu}>
+          <SubMenu
+            key="avatar" title={<a><img alt="avatar" src={defaultAvatar} className={styles.avatar} /></a>}
+            className={styles.submenu}
+          >
             <MenuItemGroup>
-              <MenuItem key="profile">My profile</MenuItem>
+              <MenuItem key="profile">
+                <Link to="/123">
+                  My profile
+                </Link>
+              </MenuItem>
               <MenuItem key="gallery">My gallery</MenuItem>
               <MenuItem key="manage">Manage photo</MenuItem>
             </MenuItemGroup>
