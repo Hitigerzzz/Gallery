@@ -6,6 +6,7 @@ import ActivityPage from './routes/ActivityPage';
 import LikedPage from './routes/LikedPage';
 import MessagePage from './routes/MessagePage';
 import ProfilePage from './routes/ProfilePage';
+import GalleryPage from './routes/GalleryPage';
 
 function RouterConfig({ history }) {
   return (
@@ -17,6 +18,7 @@ function RouterConfig({ history }) {
         <Route path="/liked" exact component={LikedPage} />
         <Route path="/message" exact component={MessagePage} />
         <Route path="/:userID" exact component={ProfilePage} />
+        <Route path="/gallery/:galleryID" exact component={GalleryPage} />
       </Switch>
     </Router>
   );

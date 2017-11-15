@@ -2,9 +2,11 @@
  * Created by Hitigerzzz on 2017/11/14.
  */
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import styles from './PictureItem.css';
+import PictureModalContent from '../PictureModalContent/PictureModalContent';
 import avatar from '../../assets/img/jj.jpg';
+
 
 class PictureItem extends React.Component {
   constructor(props) {
@@ -13,6 +15,9 @@ class PictureItem extends React.Component {
       isLike: false,
     };
   }
+  setModalVisible = (modalVisible) => {
+    this.setState({ modalVisible });
+  };
   likePictureChange = () => {
     this.setState({
       isLike: !this.state.isLike,
@@ -21,7 +26,16 @@ class PictureItem extends React.Component {
   render() {
     const { className, src } = this.props;
     return (
-      <div className={`${styles.container} ${className}`}>
+      <div className={`${styles.container} ${className}`} onClick={() => this.setModalVisible(true)}>
+        <Modal
+          style={{ top: 20 }}
+          visible={this.state.modalVisible}
+          footer={null}
+          width={'96%'}
+          onCancel={() => this.setModalVisible(false)}
+        >
+          <PictureModalContent img={src} />
+        </Modal>
         <img alt="item" src={src} />
         <div className={styles.info}>
           <div className={styles.buttons}>

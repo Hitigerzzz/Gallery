@@ -10,9 +10,10 @@
     overflow: hidden;
     height: 100%;
     width: calc(100% - 340px);
+    position: relative;
 
     img {
-      @include cover-img;
+      @include contain-img;
     }
   }
 

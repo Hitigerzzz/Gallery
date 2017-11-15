@@ -3,11 +3,18 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import styles from './GalleryItem.css';
 
-const GalleryItem = ({ src, className }) => {
+const GalleryItem = ({ dispatch, src, className }) => {
+  const showGalleryDetail = () => {
+    dispatch(routerRedux.push({
+      pathname: '/gallery/123',
+    }));
+  };
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={`${styles.container} ${className}`} onClick={showGalleryDetail}>
       <div className={styles.photos}>
         <div className={styles.left}>
           <img alt="title" src={src[0]} />
@@ -36,4 +43,4 @@ GalleryItem.propTypes = {
   src: PropTypes.array.isRequired,
 };
 
-export default GalleryItem;
+export default connect()(GalleryItem);

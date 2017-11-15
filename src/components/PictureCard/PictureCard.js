@@ -6,7 +6,7 @@ import { Button, Modal } from 'antd';
 import styles from './PictureCard.css';
 import demo from '../../assets/img/wide.jpg';
 import avatar from '../../assets/img/jj.jpg';
-import PictureModal from '../PictureModalContent/PictureModalContent';
+import PictureModalContent from '../PictureModalContent/PictureModalContent';
 import FollowBtn from '../FollowBtn/FollowBtn';
 
 class PictureCard extends React.Component {
@@ -18,9 +18,9 @@ class PictureCard extends React.Component {
       isFollowing: false,
     };
   }
-  setModalVisible(modalVisible) {
+  setModalVisible = (modalVisible) => {
     this.setState({ modalVisible });
-  }
+  };
   likePictureChange = () => {
     this.setState({
       isLike: !this.state.isLike,
@@ -37,7 +37,7 @@ class PictureCard extends React.Component {
           width={'96%'}
           onCancel={() => this.setModalVisible(false)}
         >
-          <PictureModal img={demo} />
+          <PictureModalContent img={demo} />
         </Modal>
         <div className={styles.header}>
           <div className={styles.avatar_wrapper}>
