@@ -41,5 +41,9 @@
       }
     ```
 
-    ​
+4.  first-child 生效
+
+    `p:first-child` 第一个 p
+
+    `p :first-child` p 的第一个子元素
 

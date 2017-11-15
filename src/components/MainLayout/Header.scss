@@ -79,7 +79,7 @@
             top: -7px;
             right: 10px;
             background-color: white;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: $card-box-shadow;
             width: 14px;
             height: 14px;
             @include transform(rotate(45deg));

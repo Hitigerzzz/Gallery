@@ -1,0 +1,76 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: $white-color;
+  border: $separate-border;
+  border-radius: 3px;
+
+  &:hover {
+    box-shadow: $card-box-shadow;
+    cursor: pointer;
+  }
+
+  .photos {
+    display: flex;
+    overflow: hidden;
+    height: 300px;
+    width: 100%;
+
+    .left {
+      width: 70%;
+      position: relative;
+      margin-right: 2px;
+
+      img {
+        @include fill-img;
+      }
+    }
+
+    .right {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+
+      & :first-child {
+        margin-bottom: 2px;
+      }
+
+      .right_img_wrapper {
+        flex-grow: 1;
+        position: relative;
+
+        img {
+          @include fill-img;
+        }
+      }
+    }
+
+  }
+
+  .info {
+    padding: 12px 0 12px 8px;
+    height: 80px;
+
+    h3 {
+      color: $gray-color-ultra-dark;
+      font-size: $base-font-size;
+      font-weight: $font-weight-bold;
+    }
+
+    div {
+      margin-top: 6px;
+
+      span {
+        color: $gray-color-dark;
+        font-size: $small-font-size;
+        font-weight: $font-weight-normal;
+        margin-right: 12px;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,25 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $white-color;
+  border: $separate-border;
+  border-radius: 3px;
+  height: 380px;
+
+  &:hover {
+    box-shadow: $card-box-shadow;
+    cursor: pointer;
+  }
+
+  p {
+    color: $theme-purple-color-light;
+    font-size: 20px;
+    margin-top: 12px;
+  }
+}
