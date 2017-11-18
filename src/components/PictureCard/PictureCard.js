@@ -2,11 +2,11 @@
  * Created by Hitigerzzz on 2017/11/8.
  */
 import React from 'react';
-import { Button, Modal } from 'antd';
+import { Button } from 'antd';
 import styles from './PictureCard.css';
 import demo from '../../assets/img/wide.jpg';
 import avatar from '../../assets/img/jj.jpg';
-import PictureModalContent from '../PictureModalContent/PictureModalContent';
+import PictureModal from '../PictureModal/PictureModal';
 import FollowBtn from '../FollowBtn/FollowBtn';
 
 class PictureCard extends React.Component {
@@ -30,15 +30,9 @@ class PictureCard extends React.Component {
   render() {
     return (
       <div className={`${styles.container} ${this.props.className}`}>
-        <Modal
-          style={{ top: 20 }}
-          visible={this.state.modalVisible}
-          footer={null}
-          width={'96%'}
-          onCancel={() => this.setModalVisible(false)}
-        >
-          <PictureModalContent img={demo} />
-        </Modal>
+        <PictureModal
+          img={demo} visible={this.state.modalVisible} setModalVisible={this.setModalVisible}
+        />
         <div className={styles.header}>
           <div className={styles.avatar_wrapper}>
             <img alt="avatar" src={avatar} />

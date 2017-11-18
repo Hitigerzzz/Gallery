@@ -1,0 +1,73 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.modal {
+  text-align: center;
+  white-space: nowrap;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0;
+  }
+
+  :global {
+    .ant-modal {
+      display: inline-block;
+      vertical-align: middle;
+      top: 0;
+    }
+  }
+
+  .login_form {
+    max-width: 300px;
+    margin: 0 auto;
+
+    :global {
+      .ant-form-item-control {
+        line-height: 45px;
+
+        .ant-input-lg {
+          height: 45px;
+          font-size: $small-font-size;
+          padding-left: 30px;
+        }
+      }
+    }
+    h3 {
+      font-size: 24px;
+      color: $theme-purple-color-light;
+      padding: 40px 0;
+    }
+
+    .login_form_button {
+      width: 100%;
+      background-image: linear-gradient(left bottom,rgba(159,88,150,0) 0,rgba(159,88,150,0.6) 100%);
+      font-weight: $font-weight-normal;
+      border-radius: 5px;
+      border: none;
+      font-size: $base-font-size;
+      height: 45px;
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 65px;
+    height: 65px;
+    width: 100%;
+    background-color: $gray-color-white;
+    font-size: $small-font-size;
+    line-height: 65px;
+
+    a {
+      color: $theme-purple-color-light;
+      text-decoration: underline;
+    }
+  }
+}
