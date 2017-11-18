@@ -1,0 +1,16 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+
+  h3 {
+    font-size: $small-font-size;
+    color: $theme-purple-color-light;
+    margin-bottom: 16px;
+    line-height: 32px;
+    font-weight: $font-weight-medium;
+  }
+}

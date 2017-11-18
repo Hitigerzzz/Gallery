@@ -4,8 +4,8 @@
 import React from 'react';
 import { Tabs, Button } from 'antd';
 import styles from './ProfilePictureTab.css';
-import PictureItem from '../PictureItem/PictureItem';
 import GalleryItem from '../GalleryItem/GalleryItem';
+import PictureColumns from '../PictureColumns/PictureColumns';
 import CreateGalleryBtn from '../CreateGalleryBtn/CreateGalleryBtn';
 import high from '../../assets/img/high.jpg';
 import wide from '../../assets/img/wide.jpg';
@@ -19,22 +19,7 @@ const ProfilePictureTab = () => {
     <div className={styles.container}>
       <Tabs tabBarExtraContent={operations}>
         <TabPane tab="Photos" key="1">
-          <div className={styles.photos_body}>
-            <div className={styles.column}>
-              <PictureItem src={high} className={styles.item} />
-              <PictureItem src={wide} className={styles.item} />
-              <PictureItem src={wide} className={styles.item} />
-            </div>
-            <div className={styles.column}>
-              <PictureItem src={wide1} className={styles.item} />
-              <PictureItem src={high} className={styles.item} />
-              <PictureItem src={wide1} className={styles.item} />
-            </div>
-            <div className={styles.column}>
-              <PictureItem src={high} className={styles.item} />
-              <PictureItem src={wide} className={styles.item} />
-            </div>
-          </div>
+          <PictureColumns />
         </TabPane>
         <TabPane tab="Galleries" key="2">
           <div className={styles.gallery_body}>

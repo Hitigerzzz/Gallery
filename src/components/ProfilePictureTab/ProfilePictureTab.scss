@@ -39,19 +39,6 @@
     }
   }
 
-  .photos_body {
-    display: flex;
-    justify-content: space-between;
-
-    .column {
-      width: calc((100% - 24px * 2) / 3);
-
-      .item {
-        margin-bottom: 24px;
-      }
-    }
-  }
-
   .gallery_body {
     width: 100%;
     display: flex;
