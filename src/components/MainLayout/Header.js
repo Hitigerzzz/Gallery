@@ -78,6 +78,7 @@ class Header extends React.Component {
         </div>
         <LoginModal
           visible={this.state.loginModalVisible} setModalVisible={this.setLoginModalVisible}
+          type="login"
         />
       </div>
     );
