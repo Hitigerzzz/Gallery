@@ -17,15 +17,12 @@ exports.connect = () => {
 };
 
 exports.sql = (sql, param, mode) => {
-  // mode = mode === 'all' ? 'all' : mode === 'get' ? 'get' : 'run';
   return new Promise((resolve, reject) => {
     db[mode](sql, param, (err, data) => {
       if (err) {
         reject(new Error(err));
-      } else if (data) {
-        resolve(data);
       } else {
-        resolve('success');
+        resolve(data);
       }
     });
   });

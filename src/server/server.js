@@ -4,7 +4,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dbHelper = require('./DBHelper');
-const routes = require('./routes/index');
+const routes = require('./api/index');
 
 const app = express();
 
@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // 连接数据库
 dbHelper.connect().then((result) => {
-  console.log('here');
   console.log(result);
 }).catch((err) => {
   console.error(err);
