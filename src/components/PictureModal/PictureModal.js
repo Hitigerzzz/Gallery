@@ -28,7 +28,7 @@ class PictureModal extends React.Component {
     const { img, visible, setModalVisible } = this.props;
     return (
       <Modal
-        style={{ top: 20 }}
+        style={{ top: 30 }}
         visible={visible}
         footer={null}
         width={'96%'}

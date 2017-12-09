@@ -3,24 +3,7 @@
 @import "../../assets/scss/base";
 
 .modal {
-  text-align: center;
-  white-space: nowrap;
-
-  &:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    width: 0;
-  }
-
-  :global {
-    .ant-modal {
-      display: inline-block;
-      vertical-align: middle;
-      top: 0;
-    }
-  }
+  @include center-modal;
 
   .flip_box {
     position: relative;
@@ -73,13 +56,8 @@
       }
 
       .form_button {
+        @include theme-btn;
         width: 100%;
-        background-image: linear-gradient(to right bottom, rgba(159, 88, 150, 0) 0, rgba(159, 88, 150, 0.6) 100%);
-        font-weight: $font-weight-normal;
-        border-radius: 5px;
-        border: none;
-        font-size: $base-font-size;
-        height: 45px;
       }
     }
 

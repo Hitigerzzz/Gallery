@@ -1,0 +1,149 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+//.container {
+//  display: flex;
+//  flex-direction: column;
+//  height: 630px;
+//  justify-content: center;
+//  align-items: center;
+//  background-color: $theme-purple-color-ultra-light;
+//
+//  h1 {
+//    font-size: 45px;
+//    color: $theme-purple-color-light;
+//    margin-bottom: 20px;
+//  }
+//
+//  #license {
+//    text-align: center;
+//    font-size: $small-font-size;
+//    color: $gray-color-ultra-dark;
+//    margin-bottom: 40px;
+//  }
+//
+//  .select_button {
+//    @include theme-btn;
+//    width: 200px;
+//    margin-bottom: 20px;
+//  }
+//
+//  #drag {
+//    text-align: center;
+//    font-size: $base-font-size;
+//    color: $theme-purple-color-light;
+//    margin-bottom: 50px;
+//  }
+//}
+
+.container {
+  display: flex;
+  height: 630px;
+  background-color: $theme-purple-color-ultra-light;
+
+  .left {
+    overflow: auto;
+    height: 100%;
+    width: calc(100% - 340px);
+    position: relative;
+    padding: 20px;
+
+    .picture_wall {
+
+      :global {
+        .ant-upload-list-item {
+          width: calc((100% - 20 * 4px) / 4);
+          height: 250px;
+          margin-right: 20px;
+          padding: 0;
+          border: none;
+          position: relative;
+
+          img {
+            @include fill-img;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &:focus {
+            border: solid 1px red;
+          }
+
+          &:active {
+            border: solid 1px red;
+          }
+        }
+
+        .ant-upload-select {
+          width: calc((100% - 20 * 4px) / 4);
+          height: 250px;
+          margin-right: 20px;
+        }
+      }
+
+      .upload_button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        .upload_text {
+          color: $gray-color-ultra-dark;
+          font-size: $small-font-size;
+          margin-top: 20px;
+
+          span {
+            color: $theme-purple-color-light;
+            font-weight: $font-weight-normal;
+            font-size: $base-font-size;
+            margin-right: 2px;
+          }
+        }
+      }
+    }
+  }
+
+  .right {
+    width: 340px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .input_area {
+      font-size: $small-font-size;
+      font-weight: $font-weight-normal;
+      color: $gray-color-ultra-dark;
+
+      h3 {
+        font-size: $small-font-size;
+        color: $theme-purple-color-light;
+        font-weight: $font-weight-normal;
+        margin-bottom: 10px;
+
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
+      }
+
+      textarea {
+        resize: none;
+      }
+    }
+
+    .submit_button {
+      @include theme-btn;
+    }
+  }
+}
+
+.center_modal {
+  @include center-modal;
+}

@@ -9,10 +9,19 @@ const router = express.Router();
 const IMG_ROOT_PATH = path.join(__dirname, '../static/img');
 const FILE_FORMAT = 'binary';
 
+/**
+ * 获得图片
+ */
 router.get('/:type/:name', (req, res) => {
   const imgUrl = path.join(IMG_ROOT_PATH, req.params.type, req.params.name);
   const content = fs.readFileSync(imgUrl, FILE_FORMAT);
   res.write(content, FILE_FORMAT);
 });
 
+router.post('/upload', (req, res) => {
+  console.log(req);
+  res.end();
+});
+
 module.exports = router;
+

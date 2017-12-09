@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import styles from './Header.css';
 import defaultAvatar from '../../assets/img/default-avatar.png';
 import LoginModal from '../../components/LoginModal/LoginModal';
+import UploadModal from '../../components/UploadModal/UploadModal';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -15,10 +16,14 @@ class Header extends React.Component {
     super(props);
     this.state = {
       loginModalVisible: false,
+      uploadModalVisible: false,
     };
   }
   setLoginModalVisible = (visible) => {
     this.setState({ loginModalVisible: visible });
+  };
+  setUploadModalVisible = (visible) => {
+    this.setState({ uploadModalVisible: visible });
   };
   render() {
     const { location } = this.props;
@@ -75,10 +80,14 @@ class Header extends React.Component {
             </SubMenu>
           </Menu>
           <Button onClick={() => this.setLoginModalVisible(true)}>Login</Button>
+          <Button onClick={() => this.setUploadModalVisible(true)}>Upload</Button>
         </div>
         <LoginModal
           visible={this.state.loginModalVisible} setModalVisible={this.setLoginModalVisible}
           type="login"
+        />
+        <UploadModal
+          visible={this.state.uploadModalVisible} setModalVisible={this.setUploadModalVisible}
         />
       </div>
     );
