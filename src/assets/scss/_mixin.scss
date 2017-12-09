@@ -1,3 +1,4 @@
+@import "variables";
 $prefix-for-webkit: true !default;
 $prefix-for-mozilla: true !default;
 $prefix-for-microsoft: true !default;
@@ -140,6 +141,21 @@ $all: webkit moz ms o spec;
   font-size: 18px;
   height: 45px;
   line-height: 45px;
+}
+
+@mixin blank-btn() {
+  font-size: $small-font-size;
+  color: $gray-color-dark;
+  font-weight: $font-weight-normal;
+  height: 30px;
+  line-height: 30px;
+  border: none;
+  background-color: transparent;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 @mixin center-modal() {

@@ -59,7 +59,7 @@ class LoginForm extends React.Component {
         </Form>
         <div className={styles.footer}>
           <a href="">Forgot password</a>
-          <a onClick={goTo}>Sign Up</a>
+          <a onClick={goTo}>Join free</a>
         </div>
       </div>
     );

@@ -4,6 +4,7 @@
 const crypto = require('crypto');
 
 module.exports = {
+  MD5_SUFFIX: 'eiowafnajkdlfjsdkfj大姐夫文姐到了困难额我积分那看到你@#￥%……&）（*&……）',
   md5(pwd) {
     const md5 = crypto.createHash('md5');
     return md5.update(pwd).digest('hex');

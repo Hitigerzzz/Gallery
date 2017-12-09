@@ -1,6 +1,7 @@
 import React from 'react';
-import { Menu, Button } from 'antd';
+import { Menu, Button, Icon } from 'antd';
 import { Link } from 'dva/router';
+import { connect } from 'dva';
 import SearchBar from './SearchBar';
 import styles from './Header.css';
 import defaultAvatar from '../../assets/img/default-avatar.png';
@@ -15,18 +16,30 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginModalVisible: false,
+      mode: 'login',
       uploadModalVisible: false,
     };
   }
-  setLoginModalVisible = (visible) => {
-    this.setState({ loginModalVisible: visible });
+  setLoginModalVisible = (visible, mode) => {
+    this.props.dispatch({
+      type: 'user/saveLoginModalVisible',
+      payload: {
+        loginModalVisible: visible,
+      },
+    });
+    this.setState({ loginModalVisible: visible, mode });
   };
   setUploadModalVisible = (visible) => {
     this.setState({ uploadModalVisible: visible });
   };
+  handleLogout = () => {
+    this.props.dispatch({
+      type: 'user/logout',
+    });
+  };
   render() {
-    const { location } = this.props;
+    const { location, userInfo } = this.props;
+    console.log('Header, userInfo:', userInfo);
     return (
       <div className={styles.header}>
         <Menu
@@ -64,27 +77,42 @@ class Header extends React.Component {
             mode="horizontal"
             className={styles.menu}
           >
-            <SubMenu
-              key="avatar" title={<a><img alt="avatar" src={defaultAvatar} className={styles.avatar} /></a>}
-              className={styles.submenu}
-            >
-              <MenuItemGroup>
-                <MenuItem key="profile">
-                  <Link to="/123">
-                    My profile
-                  </Link>
-                </MenuItem>
-                <MenuItem key="gallery">My gallery</MenuItem>
-                <MenuItem key="manage">Manage photo</MenuItem>
-              </MenuItemGroup>
-            </SubMenu>
+            {
+              userInfo ?
+                <SubMenu
+                  key="avatar" title={<a><img alt="avatar" src={defaultAvatar} className={styles.avatar} /></a>}
+                  className={styles.submenu}
+                >
+                  <MenuItemGroup>
+                    <MenuItem key="profile">
+                      <Link to="/123">
+                        My profile
+                      </Link>
+                    </MenuItem>
+                    <MenuItem key="gallery">My gallery</MenuItem>
+                    <MenuItem key="manage">Manage photo</MenuItem>
+                  </MenuItemGroup>
+                </SubMenu>
+                : null
+            }
           </Menu>
-          <Button onClick={() => this.setLoginModalVisible(true)}>Login</Button>
-          <Button onClick={() => this.setUploadModalVisible(true)}>Upload</Button>
+          {
+            userInfo ?
+              <Button type="primary" className={styles.upload_button} onClick={() => this.setUploadModalVisible(true)}>
+                <Icon type="cloud-upload-o" style={{ fontSize: 18 }} />Upload
+              </Button>
+              :
+              <div className={styles.action_button}>
+                <Button className={styles.login_button} onClick={() => this.setLoginModalVisible(true, 'login')}>Log in</Button>
+                <Button type="primary" className={styles.upload_button} onClick={() => this.setLoginModalVisible(true, 'register')}>
+                  Join free
+                </Button>
+              </div>
+          }
         </div>
         <LoginModal
-          visible={this.state.loginModalVisible} setModalVisible={this.setLoginModalVisible}
-          mode="login"
+          visible={this.props.loginModalVisible} setModalVisible={this.setLoginModalVisible}
+          mode={this.state.mode}
         />
         <UploadModal
           visible={this.state.uploadModalVisible} setModalVisible={this.setUploadModalVisible}
@@ -94,4 +122,8 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  const { userInfo, loginModalVisible } = state.user;
+  return { userInfo, loginModalVisible };
+}
+export default connect(mapStateToProps)(Header);

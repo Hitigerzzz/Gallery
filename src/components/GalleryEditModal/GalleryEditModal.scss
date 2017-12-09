@@ -61,18 +61,7 @@
       }
 
       #cancel_button {
-        font-size: $small-font-size;
-        color: $gray-color-dark;
-        font-weight: $font-weight-normal;
-        height: 30px;
-        line-height: 30px;
-        border: none;
-        background-color: transparent;
-        opacity: 1;
-
-        &:hover {
-          opacity: 0.8;
-        }
+        @include blank-btn;
       }
 
       #delete_button {
@@ -88,7 +77,7 @@
           color: $red-color;
         }
 
-        &:focus {
+        &:focus  {
           color: lighten($red-color, 10%);
         }
 

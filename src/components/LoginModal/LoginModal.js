@@ -17,6 +17,13 @@ class LoginModal extends React.Component {
       isRegisterVisible: !isLoginVisible,
     };
   }
+  componentWillReceiveProps(nextProps) {
+    const isLoginVisible = nextProps.mode === 'login';
+    this.setState({
+      isLoginVisible,
+      isRegisterVisible: !isLoginVisible,
+    });
+  }
   gotoRegister = () => {
     this.setState({
       isLoginVisible: false,
@@ -54,6 +61,6 @@ class LoginModal extends React.Component {
 LoginModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   setModalVisible: PropTypes.func.isRequired,
-  mode: PropTypes.string.isRequired,
+  mode: PropTypes.string,
 };
 export default LoginModal;

@@ -24,3 +24,10 @@ export function register(user) {
     body: JSON.stringify(user),
   });
 }
+
+/**
+ * 获取用户登录信息
+ */
+export function fetchUserLoginInfo() {
+  return request(`${USER_API}userLoginInfo`);
+}

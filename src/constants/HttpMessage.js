@@ -19,6 +19,7 @@ module.exports = exports = {
       USER_REGISTER_SUCCESS: 'register successfully',
       USER_LOGIN_FAILURE: 'incorrect username or password',
       USER_LOGIN_SUCCESS: 'login successfully',
+      USER_LOGIN_AGAIN: 'please login again',
     },
     server: {
       SERVER_ERROR: 'server error',

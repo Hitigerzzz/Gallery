@@ -3,14 +3,24 @@
  */
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const dbHelper = require('./DBHelper');
 const routes = require('./api/index');
 
 const app = express();
 
-// bd 解析器
+// body 解析器
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// session
+app.use(cookieParser());
+app.use(session({
+  secret: 'express_react_cookie',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60 * 1000 * 30 }, // 过期时间 30 min
+}));
 // 连接数据库
 dbHelper.connect().then((result) => {
   console.log(result);
