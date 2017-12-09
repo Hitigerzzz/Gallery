@@ -39,7 +39,7 @@
 
 .container {
   display: flex;
-  height: 630px;
+  height: 500px;
   background-color: $theme-purple-color-ultra-light;
 
   .left {
@@ -49,38 +49,37 @@
     position: relative;
     padding: 20px;
 
-    .picture_wall {
+    .picture {
 
       :global {
         .ant-upload-list-item {
-          width: calc((100% - 20 * 4px) / 4);
-          height: 250px;
-          margin-right: 20px;
+          width: 100%;
+          height: 100%;
           padding: 0;
+          margin: 0;
           border: none;
           position: relative;
 
           img {
             @include fill-img;
           }
+        }
 
-          &:hover {
-            cursor: pointer;
-          }
-
-          &:focus {
-            border: solid 1px red;
-          }
-
-          &:active {
-            border: solid 1px red;
-          }
+        .ant-upload-list-item-uploading {
+          text-align: center;
         }
 
         .ant-upload-select {
-          width: calc((100% - 20 * 4px) / 4);
-          height: 250px;
-          margin-right: 20px;
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          margin: 0;
+          border: none;
+          position: relative;
+
+          .ant-upload {
+            padding: 0;
+          }
         }
       }
 
@@ -91,6 +90,7 @@
         align-items: center;
         width: 100%;
         height: 100%;
+        background-color: $white-color;
 
         .upload_text {
           color: $gray-color-ultra-dark;

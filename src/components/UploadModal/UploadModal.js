@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, Upload, Input, Icon, Select } from 'antd';
+import { Button, Modal, Upload, Input, Icon, Select, message } from 'antd';
 import styles from './UploadModal.css';
 
 const { TextArea } = Input;
@@ -13,79 +13,20 @@ class UploadModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDraggerVisible: true,
       previewVisible: false,
       previewImage: '',
-      fileList: [{
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done',
-        url: '/api/img/user/jj.jpg',
-      }, {
-        uid: -2,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -3,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -4,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -5,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -6,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -7,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -8,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -9,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -10,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }, {
-        uid: -11,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }],
+      fileList: '',
     };
   }
 
   handleCancel = () => this.setState({ previewVisible: false });
-
   handlePreview = (file) => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
       previewVisible: true,
     });
   };
-
   handleChange = ({ fileList }) => this.setState({ fileList });
-
   render() {
     const { visible, setModalVisible } = this.props;
     const { previewVisible, previewImage, fileList } = this.state;
@@ -103,20 +44,21 @@ class UploadModal extends React.Component {
         style={{ top: 50 }}
         visible={visible}
         footer={null}
-        width={'90%'}
+        width={'50%'}
         onCancel={() => setModalVisible(false)}
       >
         <div className={styles.container}>
           <div className={styles.left}>
             <Upload
+              name="avatar"
               action="//jsonplaceholder.typicode.com/posts/"
               listType="picture-card"
               fileList={fileList}
               onPreview={this.handlePreview}
               onChange={this.handleChange}
-              className={styles.picture_wall}
+              className={styles.picture}
             >
-              {uploadButton}
+              {fileList.length >= 1 ? null : uploadButton}
             </Upload>
             <Modal
               visible={previewVisible}
