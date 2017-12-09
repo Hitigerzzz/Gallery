@@ -1,0 +1,101 @@
+@import "../../assets/scss/mixin";
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+
+.modal {
+  @include center-modal;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 20px;
+    background-color: $theme-purple-color-ultra-light;
+
+    h1 {
+      font-size: 26px;
+      color: $gray-color-ultra-dark;
+      font-weight: $font-weight-bold;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: $small-font-size;
+      color: $theme-purple-color-light;
+      font-weight: $font-weight-medium;
+      margin-bottom: 10px;
+    }
+
+    :global {
+      .ant-form-item {
+        width: 100%;
+
+        .ant-form-item-control {
+          width: 100%;
+          line-height: 45px;
+
+          .ant-input-lg {
+            height: 45px;
+            font-size: $small-font-size;
+          }
+        }
+
+        textarea {
+          resize: none;
+          font-size: $small-font-size;
+        }
+      }
+    }
+
+    .form_actions {
+      margin-top: 24px;
+      align-self: flex-end;
+
+      .form_button {
+        @include theme-btn;
+        font-size: $small-font-size;
+        height: 30px;
+        line-height: 30px;
+        margin-left: 24px;
+      }
+
+      #cancel_button {
+        font-size: $small-font-size;
+        color: $gray-color-dark;
+        font-weight: $font-weight-normal;
+        height: 30px;
+        line-height: 30px;
+        border: none;
+        background-color: transparent;
+        opacity: 1;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      #delete_button {
+        font-size: $small-font-size;
+        color: $gray-color-dark;
+        font-weight: $font-weight-normal;
+        height: 30px;
+        line-height: 30px;
+        border: none;
+        background-color: transparent;
+
+        &:hover {
+          color: $red-color;
+        }
+
+        &:focus {
+          color: lighten($red-color, 10%);
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}

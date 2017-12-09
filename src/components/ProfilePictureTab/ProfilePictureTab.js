@@ -6,7 +6,7 @@ import { Tabs, Button } from 'antd';
 import styles from './ProfilePictureTab.css';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import PictureColumns from '../PictureColumns/PictureColumns';
-import CreateGalleryBtn from '../CreateGalleryBtn/CreateGalleryBtn';
+import CreateGalleryBtn from '../GalleryCreateBtn/GalleryCreateBtn';
 import high from '../../assets/img/high.jpg';
 import wide from '../../assets/img/wide.jpg';
 import wide1 from '../../assets/img/wide1.jpg';

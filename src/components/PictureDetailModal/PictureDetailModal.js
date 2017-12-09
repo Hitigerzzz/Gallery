@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Input, Modal } from 'antd';
-import styles from './PictureModal.css';
+import styles from './PictureDetailModal.css';
 import avatar from '../../assets/img/jj.jpg';
 import FollowBtn from '../FollowBtn/FollowBtn';
 import commentIcon from '../../assets/img/comment-icon.png';

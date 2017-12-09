@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import styles from './PictureCard.css';
 import demo from '../../assets/img/wide.jpg';
 import avatar from '../../assets/img/jj.jpg';
-import PictureModal from '../PictureModal/PictureModal';
+import PictureModal from '../PictureDetailModal/PictureDetailModal';
 import FollowBtn from '../FollowBtn/FollowBtn';
 
 class PictureCard extends React.Component {

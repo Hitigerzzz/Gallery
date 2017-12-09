@@ -4,7 +4,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import styles from './PictureItem.css';
-import PictureModal from '../PictureModal/PictureModal';
+import PictureModal from '../PictureDetailModal/PictureDetailModal';
 import avatar from '../../assets/img/jj.jpg';
 
 

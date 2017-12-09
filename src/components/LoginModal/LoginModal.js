@@ -11,7 +11,7 @@ import RegisterForm from './RegisterForm';
 class LoginModal extends React.Component {
   constructor(props) {
     super(props);
-    const isLoginVisible = this.props.type === 'login';
+    const isLoginVisible = this.props.mode === 'login';
     this.state = {
       isLoginVisible,
       isRegisterVisible: !isLoginVisible,
@@ -54,6 +54,6 @@ class LoginModal extends React.Component {
 LoginModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   setModalVisible: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
+  mode: PropTypes.string.isRequired,
 };
 export default LoginModal;

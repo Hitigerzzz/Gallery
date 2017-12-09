@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, Upload, Input, Icon, Select, message } from 'antd';
-import styles from './UploadModal.css';
+import styles from './PictureUploadModal.css';
 
 const { TextArea } = Input;
 const Option = Select.Option;
