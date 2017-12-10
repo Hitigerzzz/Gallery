@@ -172,3 +172,37 @@
     user: 'user (username, address, description, password) values(?, ?, ?, ?)',
     ```
 
+11.  express 获得 formdata 数据
+
+     前端请求：
+
+     ```javascript
+     export function uploadPicture(picture) {
+       /* eslint-disable no-undef */
+       const formData = new window.FormData();
+       formData.append('title', picture.title);
+       formData.append('category', picture.category);
+       formData.append('description', picture.description);
+       formData.append('file', picture.file);
+       formData.append('postTime', picture.postTime);
+       formData.append('userId', picture.userId);
+       return request(`${IMG_API}upload`, {
+         method: 'POST',
+         contentType: 'multipart/form-data',
+         body: formData,
+       });
+     }
+     ```
+
+     后端 express 处理 ，使用express的中间件connect-multiparty ,它是专门处理此类post数据相关的依赖包。
+
+     ```
+     const multipart = require('connect-multiparty');
+     const multipartMiddleware = multipart();
+     router.post('/upload', multipartMiddleware, (req, res) => {
+       console.log(req.body);
+       res.end();
+     });
+     ```
+
+     ​

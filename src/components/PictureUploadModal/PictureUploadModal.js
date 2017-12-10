@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'dva';
 import { Form, Button, Modal, Upload, Input, Icon, Select } from 'antd';
 import styles from './PictureUploadModal.css';
 
@@ -19,7 +20,6 @@ class PictureUploadModal extends React.Component {
       fileList: '',
     };
   }
-
   handleCancel = () => this.setState({ previewVisible: false });
   handlePreview = (file) => {
     this.setState({
@@ -28,7 +28,26 @@ class PictureUploadModal extends React.Component {
     });
   };
   handleChange = ({ fileList }) => this.setState({ fileList });
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('upload submit', values);
+        const data = {
+          title: values.title,
+          category: values.category,
+          description: values.description,
+          file: values.upload.file,
+        };
+        this.props.dispatch({
+          type: 'picture/uploadPicture',
+          payload: data,
+        });
+      }
+    });
+  };
   render() {
+    const { getFieldDecorator } = this.props.form;
     const { visible, setModalVisible } = this.props;
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
@@ -48,19 +67,23 @@ class PictureUploadModal extends React.Component {
         width={'50%'}
         onCancel={() => setModalVisible(false)}
       >
-        <div className={styles.container}>
+        <Form onSubmit={this.handleSubmit} className={styles.container}>
           <div className={styles.left}>
-            <Upload
-              name="avatar"
-              action="/api/img/upload"
-              listType="picture-card"
-              fileList={fileList}
-              onPreview={this.handlePreview}
-              onChange={this.handleChange}
-              className={styles.picture}
-            >
-              {fileList.length >= 1 ? null : uploadButton}
-            </Upload>
+            {getFieldDecorator('upload', {
+              rules: [{ required: true, message: 'Please upload photo!' }],
+            })(
+              <Upload
+                name="avatar"
+                action="/api/img/preUpload"
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={this.handlePreview}
+                onChange={this.handleChange}
+                className={styles.picture}
+              >
+                {fileList.length >= 1 ? null : uploadButton}
+              </Upload>,
+              )}
             <Modal
               visible={previewVisible}
               footer={null}
@@ -73,27 +96,44 @@ class PictureUploadModal extends React.Component {
           <div className={styles.right}>
             <div className={styles.input_area}>
               <h3>Title</h3>
-              <Input />
+              <FormItem>
+                {getFieldDecorator('title', {
+                  rules: [{ required: true, message: 'Please input photo title!' }],
+                })(
+                  <Input />,
+                )}
+              </FormItem>
               <h3>Category</h3>
-              <Select defaultValue="lucy" style={{ width: '100%' }} size={'large'}>
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="Yiminghe">yiminghe</Option>
-              </Select>
+              <FormItem>
+                {getFieldDecorator('category', {
+                  initialValue: 'other',
+                  rules: [{ required: true, message: 'Please choose photo category!' }],
+                })(
+                  <Select style={{ width: '100%' }} size={'large'}>
+                    <Option value="jack">Jack</Option>
+                    <Option value="lucy">Lucy</Option>
+                    <Option value="Yiminghe">yiminghe</Option>
+                  </Select>,
+                )}
+              </FormItem>
               <h3>Description</h3>
-              <TextArea rows={4} />
+              <FormItem>
+                {getFieldDecorator('description')(
+                  <TextArea rows={4} />,
+                )}
+              </FormItem>
             </div>
-            <Button type="primary" className={styles.submit_button}>Submit</Button>
+            <Button type="primary" htmlType="submit" className={styles.submit_button}>Submit</Button>
           </div>
-        </div>
+        </Form>
       </Modal>
     );
   }
 }
-
-PictureUploadModal.propTypes = {
+const WrappedNormalForm = Form.create()(PictureUploadModal);
+WrappedNormalForm.propTypes = {
   visible: PropTypes.bool.isRequired,
   setModalVisible: PropTypes.func.isRequired,
 };
 
-export default PictureUploadModal;
+export default connect()(WrappedNormalForm);

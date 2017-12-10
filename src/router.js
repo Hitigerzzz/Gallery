@@ -5,37 +5,37 @@ import dynamic from 'dva/dynamic';
 function RouterConfig({ history, app }) {
   const IndexPage = dynamic({
     app,
-    models: () => [import('./models/user')],
+    models: () => [import('./models/user'), import('./models/picture')],
     component: () => import('./routes/IndexPage'),
   });
   const FollowPage = dynamic({
     app,
-    models: () => [import('./models/user')],
+    models: () => [import('./models/user'), import('./models/picture')],
     component: () => import('./routes/FollowPage'),
   });
   const ActivityPage = dynamic({
     app,
-    models: () => [import('./models/user')],
+    models: () => [import('./models/user'), import('./models/picture')],
     component: () => import('./routes/ActivityPage'),
   });
   const LikedPage = dynamic({
     app,
-    models: () => [import('./models/user')],
+    models: () => [import('./models/user'), import('./models/picture')],
     component: () => import('./routes/LikedPage'),
   });
   const MessagePage = dynamic({
     app,
-    models: () => [import('./models/user')],
+    models: () => [import('./models/user'), import('./models/picture')],
     component: () => import('./routes/MessagePage'),
   });
   const ProfilePage = dynamic({
     app,
-    models: () => [import('./models/user')],
+    models: () => [import('./models/user'), import('./models/picture')],
     component: () => import('./routes/ProfilePage'),
   });
   const GalleryPage = dynamic({
     app,
-    models: () => [import('./models/user')],
+    models: () => [import('./models/user'), import('./models/picture')],
     component: () => import('./routes/GalleryPage'),
   });
 
