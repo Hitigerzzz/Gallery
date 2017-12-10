@@ -138,5 +138,37 @@
     }
     ```
 
-    ​
+9.  javascript fetch 跨域请求时 session失效问题
+
+    javascript 使用fetch进行跨域请求时默认是不带cookie的，所以会造成 session失效。
+
+    解决办法：在请求中添加 credentials: 'include',
+
+    ```javascript
+    export function login(user) {
+      return request(`${USER_API}login`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+    }
+    ```
+
+
+    ```javascript
+    export function fetchUserLoginInfo() {
+      return request(`${USER_API}userLoginInfo`, {
+        credentials: 'include',
+      });
+    }
+    ```
+
+10.  sql 主键 Id 为 autoincrement，某一字段如 avatar 设置了默认值时，在向表中 insert 数据时不用写出这些字段，下面例子忽略了 id 和 avatar
+
+    ```
+    user: 'user (username, address, description, password) values(?, ?, ?, ?)',
+    ```
 

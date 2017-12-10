@@ -16,8 +16,8 @@ app.use(bodyParser.json());
 // session
 app.use(cookieParser());
 app.use(session({
-  secret: 'express_react_cookie',
-  resave: false,
+  secret: 'gallery',
+  resave: true,
   saveUninitialized: true,
   cookie: { maxAge: 60 * 1000 * 30 }, // 过期时间 30 min
 }));

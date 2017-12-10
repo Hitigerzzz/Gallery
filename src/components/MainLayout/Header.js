@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import styles from './Header.css';
 import defaultAvatar from '../../assets/img/default-avatar.png';
 import LoginModal from '../../components/LoginModal/LoginModal';
-import UploadModal from '../PictureUploadModal/PictureUploadModal';
+import PictureUploadModal from '../PictureUploadModal/PictureUploadModal';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -20,6 +20,7 @@ class Header extends React.Component {
       uploadModalVisible: false,
     };
   }
+
   setLoginModalVisible = (visible, mode) => {
     this.props.dispatch({
       type: 'user/saveLoginModalVisible',
@@ -37,6 +38,7 @@ class Header extends React.Component {
       type: 'user/logout',
     });
   };
+
   render() {
     const { location, userInfo } = this.props;
     console.log('Header, userInfo:', userInfo);
@@ -80,7 +82,10 @@ class Header extends React.Component {
             {
               userInfo ?
                 <SubMenu
-                  key="avatar" title={<a><img alt="avatar" src={defaultAvatar} className={styles.avatar} /></a>}
+                  key="avatar"
+                  title={<a>
+                    <img alt="avatar" src={userInfo.avatar ? `/api/${userInfo.avatar}` : defaultAvatar} className={styles.avatar} />
+                  </a>}
                   className={styles.submenu}
                 >
                   <MenuItemGroup>
@@ -103,8 +108,12 @@ class Header extends React.Component {
               </Button>
               :
               <div className={styles.action_button}>
-                <Button className={styles.login_button} onClick={() => this.setLoginModalVisible(true, 'login')}>Log in</Button>
-                <Button type="primary" className={styles.upload_button} onClick={() => this.setLoginModalVisible(true, 'register')}>
+                <Button className={styles.login_button} onClick={() => this.setLoginModalVisible(true, 'login')}>Log
+                  in</Button>
+                <Button
+                  type="primary" className={styles.upload_button}
+                  onClick={() => this.setLoginModalVisible(true, 'register')}
+                >
                   Join free
                 </Button>
               </div>
@@ -114,7 +123,7 @@ class Header extends React.Component {
           visible={this.props.loginModalVisible} setModalVisible={this.setLoginModalVisible}
           mode={this.state.mode}
         />
-        <UploadModal
+        <PictureUploadModal
           visible={this.state.uploadModalVisible} setModalVisible={this.setUploadModalVisible}
         />
       </div>
@@ -126,4 +135,5 @@ function mapStateToProps(state) {
   const { userInfo, loginModalVisible } = state.user;
   return { userInfo, loginModalVisible };
 }
+
 export default connect(mapStateToProps)(Header);

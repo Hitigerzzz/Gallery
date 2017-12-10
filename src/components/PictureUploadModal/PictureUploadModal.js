@@ -3,13 +3,14 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, Upload, Input, Icon, Select, message } from 'antd';
+import { Form, Button, Modal, Upload, Input, Icon, Select } from 'antd';
 import styles from './PictureUploadModal.css';
 
-const { TextArea } = Input;
+const TextArea = Input.TextArea;
 const Option = Select.Option;
+const FormItem = Form.Item;
 
-class UploadModal extends React.Component {
+class PictureUploadModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +52,7 @@ class UploadModal extends React.Component {
           <div className={styles.left}>
             <Upload
               name="avatar"
-              action="//jsonplaceholder.typicode.com/posts/"
+              action="/api/img/upload"
               listType="picture-card"
               fileList={fileList}
               onPreview={this.handlePreview}
@@ -90,9 +91,9 @@ class UploadModal extends React.Component {
   }
 }
 
-UploadModal.propTypes = {
+PictureUploadModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   setModalVisible: PropTypes.func.isRequired,
 };
 
-export default UploadModal;
+export default PictureUploadModal;

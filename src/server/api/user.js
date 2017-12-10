@@ -36,6 +36,7 @@ router.post('/login', (req, res) => {
   sql(`select * from ${tables.userTable} where username = ? and password = ?`, [username, md5(password + MD5_SUFFIX)], 'get').then((data) => {
     if (data) { /* eslint-disable no-param-reassign */
       // 存在该用户
+      delete data.password;
       req.session.userInfo = data;
       responseClient(res, HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
         HttpMessage.message.user.USER_LOGIN_SUCCESS, data);
@@ -51,13 +52,13 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/userLoginInfo', (req, res) => {
-  console.log(req.session);
+  // console.log(req.session);
   const userInfo = req.session.userInfo;
   if (userInfo) {
-    console.log('/userLoginInfo', '已登录');
+    // console.log('user/userLoginInfo', '已登录');
     responseClient(res, HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS, '', userInfo);
   } else {
-    console.log('/userLoginInfo', '未登录');
+    // console.log('user/userLoginInfo', '未登录');
     responseClient(res, HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.FAILURE,
       HttpMessage.message.USER_LOGIN_AGAIN, null);
   }

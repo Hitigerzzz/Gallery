@@ -31,12 +31,14 @@ export default {
       const response = yield call(UserService.login, user);
       console.log('models/user/login');
       console.log(response);
+      // 关闭登录弹出框
       yield put({
         type: 'saveLoginModalVisible',
         payload: {
           loginModalVisible: false,
         },
       });
+      // 保存用户信息
       yield put({
         type: 'saveUserLoginInfo',
         payload: {
@@ -45,15 +47,25 @@ export default {
       });
     },
     *initUserInfo({ payload }, { call, put }) {
-      // 已登录，获得用户信息
       const response = yield call(UserService.fetchUserLoginInfo);
       console.log('models/user/initUserInfo', response);
-      yield put({
-        type: 'saveUserLoginInfo',
-        payload: {
-          userInfo: response.data.data,
-        },
-      });
+      if (response.data.data) {
+        // 已登录，获得用户信息
+        yield put({
+          type: 'saveUserLoginInfo',
+          payload: {
+            userInfo: response.data.data,
+          },
+        });
+      } else {
+        // 未登录，弹出登录提示框
+        yield put({
+          type: 'saveLoginModalVisible',
+          payload: {
+            loginModalVisible: true,
+          },
+        });
+      }
     },
   },
 

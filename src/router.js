@@ -1,14 +1,44 @@
 import React from 'react';
 import { Router, Route, Switch } from 'dva/router';
-import IndexPage from './routes/IndexPage';
-import FollowPage from './routes/FollowPage';
-import ActivityPage from './routes/ActivityPage';
-import LikedPage from './routes/LikedPage';
-import MessagePage from './routes/MessagePage';
-import ProfilePage from './routes/ProfilePage';
-import GalleryPage from './routes/GalleryPage';
+import dynamic from 'dva/dynamic';
 
-function RouterConfig({ history }) {
+function RouterConfig({ history, app }) {
+  const IndexPage = dynamic({
+    app,
+    models: () => [import('./models/user')],
+    component: () => import('./routes/IndexPage'),
+  });
+  const FollowPage = dynamic({
+    app,
+    models: () => [import('./models/user')],
+    component: () => import('./routes/FollowPage'),
+  });
+  const ActivityPage = dynamic({
+    app,
+    models: () => [import('./models/user')],
+    component: () => import('./routes/ActivityPage'),
+  });
+  const LikedPage = dynamic({
+    app,
+    models: () => [import('./models/user')],
+    component: () => import('./routes/LikedPage'),
+  });
+  const MessagePage = dynamic({
+    app,
+    models: () => [import('./models/user')],
+    component: () => import('./routes/MessagePage'),
+  });
+  const ProfilePage = dynamic({
+    app,
+    models: () => [import('./models/user')],
+    component: () => import('./routes/ProfilePage'),
+  });
+  const GalleryPage = dynamic({
+    app,
+    models: () => [import('./models/user')],
+    component: () => import('./routes/GalleryPage'),
+  });
+
   return (
     <Router history={history}>
       <Switch>

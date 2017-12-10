@@ -8,10 +8,10 @@ import MainLayout from '../components/MainLayout/MainLayout';
 import ProfileHeader from '../components/ProfileHeader/ProfileHeader';
 import ProfilePictureTab from '../components/ProfilePictureTab/ProfilePictureTab';
 
-function IndexPage({ location }) {
+function IndexPage({ location, userInfo }) {
   return (
     <MainLayout location={location}>
-      <ProfileHeader />
+      <ProfileHeader userInfo={userInfo} />
       <ProfilePictureTab />
     </MainLayout>
   );
@@ -20,4 +20,8 @@ function IndexPage({ location }) {
 IndexPage.propTypes = {
 };
 
-export default connect()(IndexPage);
+function mapStateToProps(state) {
+  const { userInfo } = state.user;
+  return { userInfo };
+}
+export default connect(mapStateToProps)(IndexPage);

@@ -7,3 +7,26 @@ html, body {
   height: 100%;
   background-color: $theme-purple-color-ultra-light;
 }
+
+:global {
+  .ant-modal-wrap .ant-modal .ant-modal-content {
+    .ant-modal-body {
+      padding: 0;
+    }
+
+    .ant-modal-close {
+      line-height: 30px;
+      top: -20px;
+      right: -25px;
+      color: $white-color;
+
+      span {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: $base-font-size;
+        text-align: center;
+      }
+    }
+  }
+}

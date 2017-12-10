@@ -8,6 +8,7 @@ const USER_API = '/api/user/';
 export function login(user) {
   return request(`${USER_API}login`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -29,5 +30,7 @@ export function register(user) {
  * 获取用户登录信息
  */
 export function fetchUserLoginInfo() {
-  return request(`${USER_API}userLoginInfo`);
+  return request(`${USER_API}userLoginInfo`, {
+    credentials: 'include',
+  });
 }
