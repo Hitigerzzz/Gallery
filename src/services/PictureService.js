@@ -17,10 +17,13 @@ export function uploadPicture(picture) {
   return request(`${IMG_API}upload`, {
     method: 'POST',
     contentType: 'multipart/form-data',
+    credentials: 'include',
     body: formData,
   });
 }
 
 export function getUserAllPictures(userId) {
-  return request(`${IMG_API}getUserAllPictures?userId=${userId}`);
+  return request(`${IMG_API}getUserAllPictures?userId=${userId}`, {
+    credentials: 'include',
+  });
 }

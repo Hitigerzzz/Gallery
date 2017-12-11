@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import styles from './IndexPage.css';
 import MainLayout from '../components/MainLayout/MainLayout';
 import ProfileHeader from '../components/ProfileHeader/ProfileHeader';
 import ProfilePictureTab from '../components/ProfilePictureTab/ProfilePictureTab';

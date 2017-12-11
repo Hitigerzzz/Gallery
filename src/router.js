@@ -35,7 +35,7 @@ function RouterConfig({ history, app }) {
   });
   const GalleryPage = dynamic({
     app,
-    models: () => [import('./models/user'), import('./models/picture')],
+    models: () => [import('./models/user'), import('./models/picture'), import('./models/gallery')],
     component: () => import('./routes/GalleryPage'),
   });
 

@@ -4,8 +4,8 @@
 import React from 'react';
 import { Button } from 'antd';
 import styles from './GalleryInfo.css';
-import avatar from '../../assets/img/jj.jpg';
 import GalleryEditModal from '../GalleryEditModal/GalleryEditModal';
+import defaultAvatar from '../../assets/img/default-avatar.png';
 
 class GalleryHeader extends React.Component {
   constructor(props) {
@@ -14,21 +14,26 @@ class GalleryHeader extends React.Component {
       modalVisible: false,
     };
   }
+
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   };
+
   render() {
+    const { title, description, username, avatar } = this.props.galleryInfo;
+    const cover = this.props.cover;
+    const url = cover ? `url(${`/api/${cover}`})` : `url(${require('../../assets/img/wide.jpg')})`;
     return (
-      <div className={styles.background} style={{ backgroundImage: `url(${require('../../assets/img/wide.jpg')})` }}>
+      <div className={styles.background} style={{ backgroundImage: `${url}` }}>
         <div className={styles.container}>
           <div className={styles.left}>
-            <h1>buildings</h1>
-            <h2>JUST FOR TEST, yes</h2>
+            <h1>{title}</h1>
+            <h2>{description}</h2>
             <div className={styles.user_info}>
               <div className={styles.avatar_wrapper}>
-                <img alt="avatar" src={avatar} />
+                <img alt="avatar" src={avatar ? `/api/${avatar}` : defaultAvatar} />
               </div>
-              <span>Faker</span>
+              <span>{username}</span>
             </div>
           </div>
           <div className={styles.right}>

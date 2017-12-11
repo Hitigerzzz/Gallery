@@ -20,6 +20,8 @@ exports.sql = (sql, param, mode) => {
   return new Promise((resolve, reject) => {
     db[mode](sql, param, (err, data) => {
       if (err) {
+        console.log('sql error');
+        console.error('sql error', err);
         reject(new Error(err));
       } else {
         resolve(data);

@@ -6,9 +6,19 @@ import request from '../utils/request';
 const GALLERY_API = '/api/gallery/';
 
 export function getUserAllGalleries(userId) {
-  return request(`${GALLERY_API}getUserAllGalleries?userId=${userId}`);
+  return request(`${GALLERY_API}getUserAllGalleries?userId=${userId}`, {
+    credentials: 'include',
+  });
 }
 
 export function getGalleryAllPictures(galleryId) {
-  return request(`${GALLERY_API}getGalleryAllPictures?galleryId=${galleryId}`);
+  return request(`${GALLERY_API}getGalleryAllPictures?galleryId=${galleryId}`, {
+    credentials: 'include',
+  });
+}
+
+export function getGalleryInfo(galleryId) {
+  return request(`${GALLERY_API}getGalleryInfo?galleryId=${galleryId}`, {
+    credentials: 'include',
+  });
 }

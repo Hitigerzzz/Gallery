@@ -3,6 +3,9 @@
  */
 import pathToRegexp from 'path-to-regexp';
 import * as UserService from '../services/UserService';
+import * as PictureService from '../services/PictureService';
+import * as GalleryService from '../services/GalleryService';
+
 import HttpMessage from '../constants/HttpMessage';
 
 export default {
@@ -12,6 +15,9 @@ export default {
   state: {
     userInfo: '',
     loginModalVisible: false,
+    pictures: [],
+    isNeedRefresh: false, // 是否需要刷新
+    galleries: [],
   },
 
   subscriptions: {
@@ -20,6 +26,8 @@ export default {
         const match = pathToRegexp('/:userId').exec(pathname);
         if (match) {
           dispatch({ type: 'initUserInfo', payload: query });
+          dispatch({ type: 'getUserAllPictures', payload: query });
+          dispatch({ type: 'getUserAllGalleries', payload: query });
         }
       });
     },
@@ -47,23 +55,26 @@ export default {
             userInfo: response.data.data,
           },
         });
-        const picture = yield select(state => state.picture);
-        console.log('models/user/login/picture', picture);
-        if (picture.isNeedRefresh) {
+        const userModel = yield select(state => state.user);
+        console.log('models/user/login/picture', userModel);
+        if (userModel.isNeedRefresh) {
           yield put({
-            type: 'picture/getUserAllPictures',
+            type: 'getUserAllPictures',
+          });
+          yield put({
+            type: 'getUserAllGalleries',
           });
         }
       } else {
         // 用户名或密码错误
       }
     },
-    *logout({ payload }, { call, put, select }) {
-      const user = yield select(state => state.user);
-      if (user.userInfo) {
-        const userId = user.userInfo.userId;
-      }
-    },
+    // *logout({ payload }, { call, put, select }) {
+    //   const user = yield select(state => state.user);
+    //   if (user.userInfo) {
+    //     const userId = user.userInfo.userId;
+    //   }
+    // },
     *initUserInfo({ payload }, { call, put }) {
       const response = yield call(UserService.fetchUserLoginInfo);
       console.log('models/user/initUserInfo', response);
@@ -85,6 +96,62 @@ export default {
         });
       }
     },
+    *getUserAllPictures({ payload }, { call, put }) {
+      // 判断是否已经登录
+      const loginInfo = yield call(UserService.fetchUserLoginInfo);
+      const userInfo = loginInfo.data.data;
+      if (userInfo) { // 已登录
+        const response = yield call(PictureService.getUserAllPictures, userInfo.userId);
+        console.log('models/user/getUserAllPictures/response', response);
+        yield put({
+          type: 'saveUserAllPictures',
+          payload: {
+            pictures: response.data.data,
+          },
+        });
+        yield put({
+          type: 'saveNeedRefresh',
+          payload: {
+            isNeedRefresh: false,
+          },
+        });
+      } else { // 需要登录后刷新数据
+        yield put({
+          type: 'saveNeedRefresh',
+          payload: {
+            isNeedRefresh: true,
+          },
+        });
+      }
+    },
+    *getUserAllGalleries({ payload }, { call, put, select }) {
+      // 判断是否已经登录
+      const loginInfo = yield call(UserService.fetchUserLoginInfo);
+      const userInfo = loginInfo.data.data;
+      if (userInfo) {
+        const response = yield call(GalleryService.getUserAllGalleries, userInfo.userId);
+        console.log('models/user/getUserAllGalleries/response', response);
+        yield put({
+          type: 'saveGalleries',
+          payload: {
+            galleries: response.data.data,
+          },
+        });
+        yield put({
+          type: 'saveNeedRefresh',
+          payload: {
+            isNeedRefresh: false,
+          },
+        });
+      } else { // 需要登录后刷新数据
+        yield put({
+          type: 'saveNeedRefresh',
+          payload: {
+            isNeedRefresh: true,
+          },
+        });
+      }
+    },
   },
 
   reducers: {
@@ -93,6 +160,15 @@ export default {
     },
     saveLoginModalVisible(state, { payload: { loginModalVisible } }) {
       return { ...state, loginModalVisible };
+    },
+    saveUserAllPictures(state, { payload: { pictures } }) {
+      return { ...state, pictures };
+    },
+    saveNeedRefresh(state, { payload: { isNeedRefresh } }) {
+      return { ...state, isNeedRefresh };
+    },
+    saveGalleries(state, { payload: { galleries } }) {
+      return { ...state, galleries };
     },
   },
 

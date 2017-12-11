@@ -24,6 +24,7 @@
       width: 70%;
       position: relative;
       margin-right: 2px;
+      background-color: $gray-color-ultra-light;
 
       img {
         @include fill-img;
@@ -42,6 +43,7 @@
       .right_img_wrapper {
         flex-grow: 1;
         position: relative;
+        background-color: $gray-color-ultra-light;
 
         img {
           @include fill-img;

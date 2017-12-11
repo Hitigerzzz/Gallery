@@ -25,4 +25,11 @@ router.get('/getGalleryAllPictures', (req, res) => {
 router.post('/createGallery', (req, res) => {
 });
 
+router.get('/getGalleryInfo', (req, res) => {
+  const galleryId = req.query.galleryId;
+  galleryService.getGalleryInfo(galleryId, (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
+});
+
 module.exports = router;
