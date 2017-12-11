@@ -2,6 +2,7 @@
  * Created by Hitigerzzz on 2017/11/13.
  */
 import React from 'react';
+import { connect } from 'dva';
 import { Tabs, Button } from 'antd';
 import styles from './ProfilePictureTab.css';
 import GalleryItem from '../GalleryItem/GalleryItem';
@@ -14,12 +15,12 @@ import wide1 from '../../assets/img/wide1.jpg';
 const TabPane = Tabs.TabPane;
 const operations = <Button>Extra Action</Button>;
 
-const ProfilePictureTab = () => {
+const ProfilePictureTab = ({ pictures }) => {
   return (
     <div className={styles.container}>
       <Tabs tabBarExtraContent={operations}>
         <TabPane tab="Photos" key="1">
-          <PictureColumns />
+          <PictureColumns pictures={pictures} />
         </TabPane>
         <TabPane tab="Galleries" key="2">
           <div className={styles.gallery_body}>
@@ -39,4 +40,8 @@ const ProfilePictureTab = () => {
 ProfilePictureTab.propTypes = {
 };
 
-export default ProfilePictureTab;
+function mapStateToProps(state) {
+  const { pictures } = state.picture;
+  return { pictures };
+}
+export default connect(mapStateToProps)(ProfilePictureTab);

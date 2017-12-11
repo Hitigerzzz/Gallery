@@ -21,6 +21,16 @@ module.exports = exports = {
       USER_LOGIN_SUCCESS: 'login successfully',
       USER_LOGIN_AGAIN: 'please login again',
     },
+    picture: {
+      PICTURE_GET_ALL_SUCCESS: 'get all pictures successfully',
+      PICTURE_GET_ALL_EMPTY: 'user doesn\'t have picture',
+    },
+    gallery: {
+      GALLERY_GET_ALL_SUCCESS: 'get all galleries successfully',
+      GALLERY_GET_ALL_EMPTY: 'user doesn\'t have gallery',
+      GALLERY_GET_ALL_PICTURE_SUCCESS: 'get all pictures successfully',
+      GALLERY_GET_ALL_PICTURE_EMPTY: 'the gallery is empty',
+    },
     server: {
       SERVER_ERROR: 'server error',
     },

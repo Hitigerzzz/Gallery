@@ -90,7 +90,7 @@ class Header extends React.Component {
                 >
                   <MenuItemGroup>
                     <MenuItem key="profile">
-                      <Link to="/123">
+                      <Link to={`/${userInfo.userId}`}>
                         My profile
                       </Link>
                     </MenuItem>

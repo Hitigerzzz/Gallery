@@ -1,7 +1,9 @@
 /**
  * Created by Hitigerzzz on 2017/12/5.
  */
+import pathToRegexp from 'path-to-regexp';
 import * as UserService from '../services/UserService';
+import HttpMessage from '../constants/HttpMessage';
 
 export default {
 
@@ -15,8 +17,8 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
       return history.listen(({ pathname, query }) => {
-        if (pathname === '/123') {
-          console.log('所有监听路由');
+        const match = pathToRegexp('/:userId').exec(pathname);
+        if (match) {
           dispatch({ type: 'initUserInfo', payload: query });
         }
       });
@@ -27,24 +29,40 @@ export default {
     *fetch({ payload }, { call, put }) {  // eslint-disable-line
       yield put({ type: 'save' });
     },
-    *login({ payload: user }, { call, put }) {
+    *login({ payload: user }, { call, put, select }) {
       const response = yield call(UserService.login, user);
-      console.log('models/user/login');
-      console.log(response);
-      // 关闭登录弹出框
-      yield put({
-        type: 'saveLoginModalVisible',
-        payload: {
-          loginModalVisible: false,
-        },
-      });
-      // 保存用户信息
-      yield put({
-        type: 'saveUserLoginInfo',
-        payload: {
-          userInfo: response.data.data,
-        },
-      });
+      console.log('models/user/login', response.data);
+      if (response.data.code === HttpMessage.result.SUCCESS) {
+        // 关闭登录弹出框
+        yield put({
+          type: 'saveLoginModalVisible',
+          payload: {
+            loginModalVisible: false,
+          },
+        });
+        // 保存用户信息
+        yield put({
+          type: 'saveUserLoginInfo',
+          payload: {
+            userInfo: response.data.data,
+          },
+        });
+        const picture = yield select(state => state.picture);
+        console.log('models/user/login/picture', picture);
+        if (picture.isNeedRefresh) {
+          yield put({
+            type: 'picture/getUserAllPictures',
+          });
+        }
+      } else {
+        // 用户名或密码错误
+      }
+    },
+    *logout({ payload }, { call, put, select }) {
+      const user = yield select(state => state.user);
+      if (user.userInfo) {
+        const userId = user.userInfo.userId;
+      }
     },
     *initUserInfo({ payload }, { call, put }) {
       const response = yield call(UserService.fetchUserLoginInfo);

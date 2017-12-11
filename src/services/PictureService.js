@@ -6,7 +6,7 @@ import request from '../utils/request';
 const IMG_API = '/api/img/';
 
 export function uploadPicture(picture) {
-  /* eslint-disable no-undef */
+  console.log('PictureService/uploadPicture here');
   const formData = new window.FormData();
   formData.append('title', picture.title);
   formData.append('category', picture.category);
@@ -19,4 +19,8 @@ export function uploadPicture(picture) {
     contentType: 'multipart/form-data',
     body: formData,
   });
+}
+
+export function getUserAllPictures(userId) {
+  return request(`${IMG_API}getUserAllPictures?userId=${userId}`);
 }

@@ -25,13 +25,13 @@ class PictureItem extends React.Component {
     });
   };
   render() {
-    const { className, src } = this.props;
+    const { className, picture } = this.props;
     return (
       <div className={`${styles.container} ${className}`} onClick={() => this.setModalVisible(true)}>
         <PictureModal
-          img={src} visible={this.state.modalVisible} setModalVisible={this.setModalVisible}
+          img={`/api/${picture.pictureUrl}`} visible={this.state.modalVisible} setModalVisible={this.setModalVisible}
         />
-        <img alt="item" src={src} />
+        <img alt="item" src={`/api/${picture.pictureUrl}`} />
         <div className={styles.info}>
           <div className={styles.buttons}>
             <Button

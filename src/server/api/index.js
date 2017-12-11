@@ -3,6 +3,7 @@
  */
 module.exports = (app) => {
   app.use('/api/user', require('./user'));
-  app.use('/api/img', require('./img'));
+  app.use('/api/img', require('./picture'));
+  app.use('/api/gallery', require('./gallery'));
 };
 
