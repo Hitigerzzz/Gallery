@@ -41,5 +41,11 @@ router.get('/getUserAllPictures', (req, res) => {
   });
 });
 
+router.get('/getAllPictures', (req, res) => {
+  pictureService.getAllPictures((httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
+});
+
 module.exports = router;
 

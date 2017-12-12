@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /**
  * Created by Hitigerzzz on 2017/12/10.
  */
@@ -57,6 +58,26 @@ exports.getUserAllPictures = (userId, callback) => {
         callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
           HttpMessage.message.picture.PICTURE_GET_ALL_SUCCESS, pictures);
       });
+    } else if (data && data.length === 0) {
+      callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.FAILURE,
+        HttpMessage.message.picture.PICTURE_GET_ALL_EMPTY, data);
+    }
+  }).catch((err) => {
+    callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
+      HttpMessage.message.server.SERVER_ERROR, err);
+  });
+};
+
+exports.getAllPictures = (callback) => {
+  const command = `SELECT * FROM ${tables.PICTURE_TABLE}, ${tables.USER_TABLE}
+  WHERE ${tables.PICTURE_TABLE}.userId = ${tables.USER_TABLE}.userId`;
+  sql(command, [], 'all').then((data) => {
+    if (data && data.length > 0) {
+      for (let i = 0; i < data.length; i += 1) {
+        delete data[i].password;
+      }
+      callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+          HttpMessage.message.picture.PICTURE_GET_ALL_SUCCESS, data);
     } else if (data && data.length === 0) {
       callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.FAILURE,
         HttpMessage.message.picture.PICTURE_GET_ALL_EMPTY, data);

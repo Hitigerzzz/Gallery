@@ -31,7 +31,7 @@ class Header extends React.Component {
   };
   setUploadModalVisible = (visible) => {
     this.props.dispatch({
-      type: 'picture/savUploadModalVisible',
+      type: 'picture/saveUploadModalVisible',
       payload: {
         uploadModalVisible: visible,
       },

@@ -21,3 +21,9 @@ export function getUserAllPictures(userId) {
     credentials: 'include',
   });
 }
+
+export function getAllPictures() {
+  return request(`${IMG_API}getAllPictures`, {
+    credentials: 'include',
+  });
+}

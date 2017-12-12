@@ -4,8 +4,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import styles from './PictureCard.css';
-import demo from '../../assets/img/wide.jpg';
-import avatar from '../../assets/img/jj.jpg';
+import defaultAvatar from '../../assets/img/default-avatar.png';
 import PictureModal from '../PictureDetailModal/PictureDetailModal';
 import FollowBtn from '../FollowBtn/FollowBtn';
 
@@ -28,44 +27,39 @@ class PictureCard extends React.Component {
   };
 
   render() {
+    const picture = this.props.picture;
     return (
       <div className={`${styles.container} ${this.props.className}`}>
         <PictureModal
-          img={demo} visible={this.state.modalVisible} setModalVisible={this.setModalVisible}
+          picture={picture} visible={this.state.modalVisible} setModalVisible={this.setModalVisible}
         />
         <div className={styles.header}>
           <div className={styles.avatar_wrapper}>
-            <img alt="avatar" src={avatar} />
+            <img alt="avatar" src={picture.avatar ? `/api/${picture.avatar}` : defaultAvatar} />
           </div>
           <div className={styles.post_origin}>
-            <a className={styles.author_name}>Faker</a>
-            <p className={styles.post_time}>2017年10月21日 21:10</p>
+            <a className={styles.author_name}>{picture.username}</a>
+            <p className={styles.post_time}>{picture.posttime}</p>
           </div>
           <FollowBtn className={styles.follow_btn} />
         </div>
         <a className={styles.body} onClick={() => this.setModalVisible(true)}>
-          <img alt="post" src={demo} />
+          <img alt="post" src={`/api/${picture.pictureUrl}`} />
         </a>
         <div className={styles.footer}>
           <div className={styles.footer_header}>
-            <h3>Helmcken Falls sunset</h3>
+            <h3>{picture.title}</h3>
             <div className={styles.buttons}>
               <Button icon="message" />
               <Button icon="plus" />
               <Button
                 icon="heart" onClick={this.likePictureChange}
                 className={this.state.isLike ? styles.liked : styles.disliked}
-              >250</Button>
+              >{picture.likeNum}</Button>
             </div>
           </div>
           <div className={styles.footer_description}>
-            Sunset at helmcken Falls. Helmcken Falls is a 141 m (463 ft) waterfall
-            on the Murtle River within Wells Gray
-            Provincial Park in British Columbia, Canada. The protection of Helmcken
-            Falls was one of the reasons for the
-            creation of Wells Gray Provincial Park in 1939.
-            Helmcken Falls is the fourth highest waterfall in Canada, measured by
-            total straight drop without a break.
+            {picture.description}
           </div>
         </div>
       </div>

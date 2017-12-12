@@ -11,11 +11,17 @@ export default {
   namespace: 'picture',
 
   state: {
+    pictures: [],
     uploadModalVisible: false,
   },
 
   subscriptions: {
     setup({dispatch, history}) {  // eslint-disable-line
+      return history.listen(({ pathname }) => {
+        if (pathname === '/follow') {
+          dispatch({ type: 'getAllPictures' });
+        }
+      });
     },
   },
 
@@ -30,7 +36,7 @@ export default {
       if (response.data.code === HttpMessage.result.SUCCESS) {
         // 关闭上传弹出框
         yield put({
-          type: 'savUploadModalVisible',
+          type: 'saveUploadModalVisible',
           payload: {
             uploadModalVisible: false,
           },
@@ -41,11 +47,26 @@ export default {
         });
       }
     },
+    *getAllPictures({ payload }, { call, put }) {
+      const response = yield call(PictureService.getAllPictures);
+      console.log('models/picture/getAllPictures/response', response);
+      if (response.data.code === HttpMessage.result.SUCCESS) {
+        yield put({
+          type: 'saveAllPictures',
+          payload: {
+            pictures: response.data.data,
+          },
+        });
+      }
+    },
   },
 
   reducers: {
-    savUploadModalVisible(state, { payload: { uploadModalVisible } }) {
+    saveUploadModalVisible(state, { payload: { uploadModalVisible } }) {
       return { ...state, uploadModalVisible };
+    },
+    saveAllPictures(state, { payload: { pictures } }) {
+      return { ...state, pictures };
     },
   },
 

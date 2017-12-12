@@ -3,14 +3,16 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import styles from './IndexPage.css';
 import MainLayout from '../components/MainLayout/MainLayout';
 import PictureCardList from '../components/PictureCard/PictureCardList';
+import styles from './page.css';
 
-function IndexPage({ location }) {
+function IndexPage({ location, pictures }) {
   return (
     <MainLayout location={location}>
-      <PictureCardList />
+      <div className={styles.picture_card_list}>
+        <PictureCardList pictures={pictures} />
+      </div>
     </MainLayout>
   );
 }
@@ -18,4 +20,8 @@ function IndexPage({ location }) {
 IndexPage.propTypes = {
 };
 
-export default connect()(IndexPage);
+function mapStateToProps(state) {
+  const { pictures } = state.picture;
+  return { pictures };
+}
+export default connect(mapStateToProps)(IndexPage);
