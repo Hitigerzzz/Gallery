@@ -39,7 +39,7 @@ const GalleryItem = ({ dispatch, gallery, className }) => {
         <h3>{gallery.title}</h3>
         <div>
           <span>{pictures.length} photos</span>
-          <span>curated by Faker</span>
+          <span>curated by {gallery.username}</span>
         </div>
       </div>
     </div>

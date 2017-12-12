@@ -7,12 +7,16 @@ const tables = require('../tables');
 const HttpMessage = require('../../constants/HttpMessage');
 
 exports.getUserAllGalleries = (userId, callback) => {
-  const command = `SELECT * FROM ${tables.GALLERY_TABLE} WHERE userId = ?`;
+  const command = `SELECT galleryId, title, ${tables.GALLERY_TABLE}.description, ${tables.GALLERY_TABLE}.userId,
+  username, avatar
+  FROM ${tables.GALLERY_TABLE}, ${tables.USER_TABLE}
+  WHERE ${tables.GALLERY_TABLE}.userId = ? AND ${tables.GALLERY_TABLE}.userId = ${tables.USER_TABLE}.userId`;
   sql(command, [userId], 'all').then((data) => {
     if (data && data.length > 0) {
       const promises = [];
       const length = data.length;
-      const SQL_FIND_PICTURES = `SELECT * FROM ${tables.GALLERY_PICTURES_TABLE} WHERE galleryId = ?`;
+      const SQL_FIND_PICTURES = `SELECT * FROM ${tables.GALLERY_PICTURES_TABLE}, ${tables.PICTURE_TABLE} WHERE galleryId = ? and
+      ${tables.GALLERY_PICTURES_TABLE}.pictureId = ${tables.PICTURE_TABLE}.pictureId`;
       for (let i = 0; i < length; i += 1) { /* eslint-disable prefer-const */
         const gallery = data[i];
         let promise = sql(SQL_FIND_PICTURES, [gallery.galleryId], 'all').then((pictures) => {
@@ -36,21 +40,23 @@ exports.getUserAllGalleries = (userId, callback) => {
 };
 
 exports.getGalleryAllPictures = (galleryId, callback) => {
-  const command = `SELECT * FROM ${tables.GALLERY_PICTURES_TABLE} WHERE galleryId = ?`;
+  const command = `SELECT * FROM ${tables.GALLERY_PICTURES_TABLE} WHERE galleryId = ? `;
   sql(command, [galleryId], 'all').then((data) => {
     if (data && data.length > 0) {
       // 根据 pictureId 找 picture 完整信息
       const promises = [];
       const length = data.length;
       const SQL_FIND_PICTURES = `SELECT * FROM ${tables.PICTURE_TABLE} WHERE pictureId = ?`;
-      const SQL_FIND_USERNAME = `SELECT * FROM ${tables.USER_TABLE} WHERE userId = ?`;
+      const SQL_FIND_USER = `SELECT * FROM ${tables.USER_TABLE} WHERE userId = ?`;
       for (let i = 0; i < length; i += 1) { /* eslint-disable prefer-const */
-        const picture = data[i];
+        let picture = data[i];
         let promise = sql(SQL_FIND_PICTURES, [picture.pictureId], 'all').then((pictureDetail) => {
-          return sql(SQL_FIND_USERNAME, [pictureDetail[0].userId], 'get').then((user) => {
-            pictureDetail[0].username = user.username;
-            picture.pictureDetail = pictureDetail[0];
-            return picture;
+          return sql(SQL_FIND_USER, [pictureDetail[0].userId], 'get').then((user) => {
+            let item = pictureDetail[0];
+            item.username = user.username;
+            item.avatar = user.avatar;
+            item.galleryId = galleryId;
+            return item;
           });
         });
         promises.push(promise);
@@ -86,6 +92,18 @@ exports.getGalleryInfo = (galleryId, callback) => {
       callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.FAILURE,
         HttpMessage.message.gallery.GALLERY_NOT_EXIST);
     }
+  }).catch((err) => {
+    callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
+      HttpMessage.message.server.SERVER_ERROR, err);
+  });
+};
+
+exports.createGallery = (title, description, userId, callback) => {
+  const SQL_INSERT_GALLERY = `INSERT INTO ${tables.INSERT_GALLERY}`;
+  const params = [title, description, userId];
+  sql(SQL_INSERT_GALLERY, params, 'run').then((result) => {
+    callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+      HttpMessage.message.gallery.GALLERY_CREATE_SUCCESS, result);
   }).catch((err) => {
     callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
       HttpMessage.message.server.SERVER_ERROR, err);

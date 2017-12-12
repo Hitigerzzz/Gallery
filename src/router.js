@@ -47,7 +47,7 @@ function RouterConfig({ history, app }) {
         <Route path="/activity" exact component={ActivityPage} />
         <Route path="/liked" exact component={LikedPage} />
         <Route path="/message" exact component={MessagePage} />
-        <Route path="/:userId" exact component={ProfilePage} />
+        <Route path="/user/:userId" exact component={ProfilePage} />
         <Route path="/gallery/:galleryId" exact component={GalleryPage} />
       </Switch>
     </Router>

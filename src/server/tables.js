@@ -7,5 +7,6 @@ module.exports = {
   PICTURE_TABLE: 'picture',
   INSERT_PICTURE: 'picture (title, category, description, pictureUrl, userId, posttime) values(?, ?, ?, ?, ?, ?)',
   GALLERY_TABLE: 'gallery',
+  INSERT_GALLERY: 'gallery (title, description, userId) values(?, ?, ?)',
   GALLERY_PICTURES_TABLE: 'gallery_pictures',
 };

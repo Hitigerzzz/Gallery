@@ -27,7 +27,7 @@ class Header extends React.Component {
         loginModalVisible: visible,
       },
     });
-    this.setState({ loginModalVisible: visible, mode });
+    this.setState({ mode });
   };
   setUploadModalVisible = (visible) => {
     this.props.dispatch({
@@ -36,7 +36,6 @@ class Header extends React.Component {
         uploadModalVisible: visible,
       },
     });
-    this.setState({ uploadModalVisible: visible });
   };
   handleLogout = () => {
     this.props.dispatch({
@@ -60,9 +59,9 @@ class Header extends React.Component {
             </Link>
           </MenuItem>
           <MenuItem key="/activity">
-            {/* <Link to="/activity">*/}
-            {/* </Link>*/}
-            ACTIVITY
+            <Link to="/activity">
+               ACTIVITY
+             </Link>
           </MenuItem>
           <MenuItem key="/liked">
             <Link to="/liked">
@@ -95,7 +94,7 @@ class Header extends React.Component {
                 >
                   <MenuItemGroup>
                     <MenuItem key="profile">
-                      <Link to={`/${userInfo.userId}`}>
+                      <Link to={`/user/${userInfo.userId}`}>
                         My profile
                       </Link>
                     </MenuItem>

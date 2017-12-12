@@ -28,6 +28,7 @@ module.exports = exports = {
       PICTURE_GET_ALL_EMPTY: 'user doesn\'t have picture',
     },
     gallery: {
+      GALLERY_CREATE_SUCCESS: 'create gallery successfully',
       GALLERY_GET_INFO_SUCCESS: 'get gallery information successfully',
       GALLERY_NOT_EXIST: 'gallery not exist',
       GALLERY_GET_ALL_SUCCESS: 'get all galleries successfully',

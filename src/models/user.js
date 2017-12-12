@@ -15,6 +15,7 @@ export default {
   state: {
     userInfo: '',
     loginModalVisible: false,
+    galleryModalVisible: false,
     pictures: [],
     isNeedRefresh: false, // 是否需要刷新
     galleries: [],
@@ -23,7 +24,7 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
       return history.listen(({ pathname, query }) => {
-        const match = pathToRegexp('/:userId').exec(pathname);
+        const match = pathToRegexp('/user/:userId').exec(pathname);
         if (match) {
           dispatch({ type: 'initUserInfo', payload: query });
           dispatch({ type: 'getUserAllPictures', payload: query });
@@ -147,6 +148,34 @@ export default {
         });
       }
     },
+    *createGallery({ payload }, { call, put }) {
+      // 判断是否已经登录
+      const loginInfo = yield call(UserService.fetchUserLoginInfo);
+      const userInfo = loginInfo.data.data;
+      if (userInfo) {
+        const gallery = { ...payload, userId: userInfo.userId };
+        const response = yield call(GalleryService.createGallery, gallery);
+        if (response.data.code === HttpMessage.result.SUCCESS) {
+          // 关闭新建弹出框
+          yield put({
+            type: 'saveGalleryModalVisible',
+            payload: {
+              galleryModalVisible: false,
+            },
+          });
+          yield put({
+            type: 'getUserAllGalleries',
+          });
+        }
+      } else { // 需要登录后刷新数据
+        yield put({
+          type: 'saveNeedRefresh',
+          payload: {
+            isNeedRefresh: true,
+          },
+        });
+      }
+    },
   },
 
   reducers: {
@@ -164,6 +193,9 @@ export default {
     },
     saveGalleries(state, { payload: { galleries } }) {
       return { ...state, galleries };
+    },
+    saveGalleryModalVisible(state, { payload: { galleryModalVisible } }) {
+      return { ...state, galleryModalVisible };
     },
   },
 

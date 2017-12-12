@@ -14,7 +14,16 @@ class GalleryEditModal extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log(values);
+        const data = {
+          title: values.title,
+          description: values.description,
+        };
+        this.props.dispatch({
+          type: 'user/createGallery',
+          payload: data,
+        });
+        // 清空表单数据
+        this.props.form.resetFields();
       }
     });
   };

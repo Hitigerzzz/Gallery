@@ -58,6 +58,8 @@ class PictureUploadModal extends React.Component {
           type: 'picture/uploadPicture',
           payload: data,
         });
+        // 清空表单数据
+        this.props.form.resetFields();
       }
     });
   };
@@ -132,9 +134,11 @@ class PictureUploadModal extends React.Component {
                   rules: [{ required: true, message: 'Please choose photo category!' }],
                 })(
                   <Select style={{ width: '100%' }} size={'large'}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
+                    <Option value="person">person</Option>
+                    <Option value="animal">animal</Option>
+                    <Option value="food">food</Option>
+                    <Option value="landscape">landscape</Option>
+                    <Option value="other">other</Option>
                   </Select>,
                 )}
               </FormItem>

@@ -23,6 +23,12 @@ router.get('/getGalleryAllPictures', (req, res) => {
 });
 
 router.post('/createGallery', (req, res) => {
+  const userId = req.body.userId;
+  const title = req.body.title;
+  const description = req.body.description;
+  galleryService.createGallery(title, description, userId, (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
 });
 
 router.get('/getGalleryInfo', (req, res) => {

@@ -22,3 +22,14 @@ export function getGalleryInfo(galleryId) {
     credentials: 'include',
   });
 }
+
+export function createGallery(gallery) {
+  return request(`${GALLERY_API}createGallery`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(gallery),
+  });
+}
