@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import Header from './Header';
-import Footer from './Footer';
 
 import styles from './MainLayout.css';
 
@@ -14,7 +13,6 @@ function MainLayout({ children, location }) {
       <div className="container">
         {children}
       </div>
-      <Footer />
     </div>
   );
 }

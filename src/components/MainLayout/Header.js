@@ -53,6 +53,11 @@ class Header extends React.Component {
           mode="horizontal"
           className={styles.menu}
         >
+          <MenuItem key="/">
+            <Link to="/">
+              HOME
+            </Link>
+          </MenuItem>
           <MenuItem key="/follow">
             <Link to="/follow">
               FOLLOW

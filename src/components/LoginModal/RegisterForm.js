@@ -2,6 +2,7 @@
  * Created by Hitigerzzz on 2017/12/5.
  */
 import React from 'react';
+import { connect } from 'dva';
 import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button } from 'antd';
 import styles from './LoginModal.css';
@@ -16,8 +17,13 @@ class RegisterForm extends React.Component {
         const data = {
           username: values.username,
           password: values.password,
-          repassword: values.repassword,
         };
+        this.props.dispatch({
+          type: 'user/register',
+          payload: data,
+        });
+        // 清空表单数据
+        this.props.form.resetFields();
       }
     });
   };
@@ -80,4 +86,4 @@ WrappedNormalForm.propTypes = {
   visible: PropTypes.bool.isRequired,
   goTo: PropTypes.func.isRequired,
 };
-export default WrappedNormalForm;
+export default connect()(WrappedNormalForm);

@@ -16,10 +16,9 @@ export function login(user) {
   });
 }
 
-export function logout(user) {
-  return request(`${USER_API}logout`, {
+export function register(user) {
+  return request(`${USER_API}register`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -27,9 +26,10 @@ export function logout(user) {
   });
 }
 
-export function register(user) {
-  return request(`${USER_API}register`, {
+export function logout(user) {
+  return request(`${USER_API}logout`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },

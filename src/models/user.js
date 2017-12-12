@@ -2,6 +2,7 @@
  * Created by Hitigerzzz on 2017/12/5.
  */
 import pathToRegexp from 'path-to-regexp';
+import { message } from 'antd';
 import * as UserService from '../services/UserService';
 import * as PictureService from '../services/PictureService';
 import * as GalleryService from '../services/GalleryService';
@@ -41,6 +42,7 @@ export default {
     *login({ payload: user }, { call, put, select }) {
       const response = yield call(UserService.login, user);
       if (response.data.code === HttpMessage.result.SUCCESS) {
+        message.success(response.data.message);
         // 关闭登录弹出框
         yield put({
           type: 'saveLoginModalVisible',
@@ -66,6 +68,15 @@ export default {
         }
       } else {
         // 用户名或密码错误
+        message.error(response.data.message);
+      }
+    },
+    *register({ payload: user }, { call, put }) {
+      const response = yield call(UserService.register, user);
+      if (response.data.code === HttpMessage.result.SUCCESS) {
+        message.success(response.data.message);
+      } else {
+        message.error(response.data.message);
       }
     },
     // *logout({ payload }, { call, put, select }) {
