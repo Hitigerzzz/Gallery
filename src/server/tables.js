@@ -10,4 +10,6 @@ module.exports = {
   INSERT_GALLERY: 'gallery (title, description, userId) values(?, ?, ?)',
   GALLERY_PICTURES_TABLE: 'gallery_pictures',
   COMMENT_TABLE: 'comment',
+  FOLLOW_TABLE: 'follow',
+  INSERT_FOLLOW: 'follow (followerId, followingId) values(?, ?)',
 };

@@ -40,3 +40,19 @@ export function fetchUserLoginInfo() {
     credentials: 'include',
   });
 }
+
+export function follow(data) {
+  return request(`${USER_API}follow`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+}
+
+export function getFollowing(userId) {
+  return request(`${USER_API}getFollowing?userId=${userId}`, {
+    credentials: 'include',
+  });
+}

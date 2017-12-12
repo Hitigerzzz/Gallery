@@ -44,3 +44,25 @@ exports.register = (username, password, callback) => {
   });
 };
 
+exports.follow = (followerId, followingId, callback) => {
+  const SQL_INSERT_FOLLOW = `INSERT INTO ${tables.INSERT_FOLLOW}`;
+  sql(SQL_INSERT_FOLLOW, [followerId, followingId], 'run').then((result) => {
+    callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+      HttpMessage.message.user.USER_FOLLOW_SUCCESS, result);
+  }).catch((err) => {
+    callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
+      HttpMessage.message.server.SERVER_ERROR, err);
+  });
+};
+
+exports.getFollowing = (userId, callback) => {
+  const SQL_FIND_FOLLOWING = `SELECT * from ${tables.FOLLOW_TABLE}, ${tables.USER_TABLE} WHERE ${tables.FOLLOW_TABLE}.followerId = ?
+  AND ${tables.FOLLOW_TABLE}.followingId = ${tables.USER_TABLE}.userId`;
+  sql(SQL_FIND_FOLLOWING, [userId], 'all').then((result) => {
+    callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+      HttpMessage.message.user.USER_FOLLOW_SUCCESS, result);
+  }).catch((err) => {
+    callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
+      HttpMessage.message.server.SERVER_ERROR, err);
+  });
+};

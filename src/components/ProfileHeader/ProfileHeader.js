@@ -21,8 +21,8 @@ const ProfileHeader = ({ userInfo }) => {
           <Button>Edit profile</Button>
         </div>
         <div className={styles.second}>
-          <div>0 Followers</div>
-          <div>3 Following</div>
+          <div>{userInfo.followerNum} Followers</div>
+          <div>{userInfo.followingNum} Following</div>
           <div><Icon type="environment-o" />{userInfo.address}</div>
         </div>
         <p className={styles.description}>

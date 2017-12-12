@@ -44,4 +44,18 @@ router.get('/userLoginInfo', (req, res) => {
   }
 });
 
+router.post('/follow', (req, res) => {
+  const followerId = req.body.followerId;
+  const followingId = req.body.followingId;
+  userService.follow(followerId, followingId, (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
+});
+
+router.get('/getFollowing', (req, res) => {
+  const userId = req.query.userId;
+  userService.getFollowing(userId, (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
+});
 module.exports = router;

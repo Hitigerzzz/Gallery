@@ -8,11 +8,12 @@ import styles from './ProfilePictureTab.css';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import PictureColumns from '../PictureColumns/PictureColumns';
 import CreateGalleryBtn from '../GalleryCreateBtn/GalleryCreateBtn';
+import FollowingItem from '../FollowItem/FollowingItem';
 
 const TabPane = Tabs.TabPane;
 const operations = <Button>Extra Action</Button>;
 
-const ProfilePictureTab = ({ pictures, galleries }) => {
+const ProfilePictureTab = ({ pictures, galleries, following }) => {
   return (
     <div className={styles.container}>
       <Tabs tabBarExtraContent={operations}>
@@ -38,7 +39,14 @@ const ProfilePictureTab = ({ pictures, galleries }) => {
           Followers
         </TabPane>
         <TabPane tab="Following" key="5">
-          Following
+          <div className={styles.following_body}>
+            {
+              following.map((item) => {
+                return (<FollowingItem
+                  following={item} key={item.followingId} className={styles.following_item} />);
+              })
+            }
+          </div>
         </TabPane>
       </Tabs>
     </div>
@@ -49,7 +57,7 @@ ProfilePictureTab.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { pictures, galleries } = state.user;
-  return { pictures, galleries };
+  const { pictures, galleries, following } = state.user;
+  return { pictures, galleries, following };
 }
 export default connect(mapStateToProps)(ProfilePictureTab);

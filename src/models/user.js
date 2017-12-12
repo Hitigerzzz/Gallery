@@ -21,6 +21,7 @@ export default {
     pictures: [],
     isNeedRefresh: false, // 是否需要刷新
     galleries: [],
+    following: [],
   },
 
   subscriptions: {
@@ -31,6 +32,7 @@ export default {
           dispatch({ type: 'initUserInfo', payload: query });
           dispatch({ type: 'getUserAllPictures', payload: query });
           dispatch({ type: 'getUserAllGalleries', payload: query });
+          dispatch({ type: 'getFollowing', payload: query });
         }
       });
     },
@@ -72,7 +74,7 @@ export default {
         message.error(response.data.message);
       }
     },
-    *register({ payload: user }, { call, put }) {
+    *register({ payload: user }, { call }) {
       const response = yield call(UserService.register, user);
       if (response.data.code === HttpMessage.result.SUCCESS) {
         message.success(response.data.message);
@@ -196,6 +198,40 @@ export default {
         });
       }
     },
+    *follow({ payload: { followingId } }, { call, put }) {
+      // 判断是否已经登录
+      const loginInfo = yield call(UserService.fetchUserLoginInfo);
+      const userInfo = loginInfo.data.data;
+      if (userInfo) {
+        const followerId = userInfo.userId;
+        const data = {
+          followerId,
+          followingId,
+        };
+        const response = yield call(UserService.follow, data);
+        if (response.data.code === HttpMessage.result.SUCCESS) {
+          // 关闭新建弹出框
+          message.success(response.data.message);
+        }
+      }
+    },
+    *getFollowing({ payload }, { call, put }) {
+      // 判断是否已经登录
+      const loginInfo = yield call(UserService.fetchUserLoginInfo);
+      const userInfo = loginInfo.data.data;
+      if (userInfo) {
+        const userId = userInfo.userId;
+        const response = yield call(UserService.getFollowing, userId);
+        if (response.data.code === HttpMessage.result.SUCCESS) {
+          yield put({
+            type: 'saveFollowing',
+            payload: {
+              following: response.data.data,
+            },
+          });
+        }
+      }
+    },
   },
 
   reducers: {
@@ -216,6 +252,9 @@ export default {
     },
     saveGalleryModalVisible(state, { payload: { galleryModalVisible } }) {
       return { ...state, galleryModalVisible };
+    },
+    saveFollowing(state, { payload: { following } }) {
+      return { ...state, following };
     },
   },
 
