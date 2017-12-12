@@ -74,8 +74,8 @@ exports.getGalleryInfo = (galleryId, callback) => {
   sql(command, [galleryId], 'get').then((data) => {
     if (data) {
       // 存在该图库
-      const SQL_FIND_USERNAME = `SELECT * FROM ${tables.USER_TABLE} WHERE userId = ?`;
-      sql(SQL_FIND_USERNAME, [data.userId], 'get').then((user) => {
+      const SQL_FIND_USER = `SELECT * FROM ${tables.USER_TABLE} WHERE userId = ?`;
+      sql(SQL_FIND_USER, [data.userId], 'get').then((user) => {
         data.username = user.username;
         data.avatar = user.avatar;
         callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,

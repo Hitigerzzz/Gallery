@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Input, Modal } from 'antd';
 import styles from './PictureDetailModal.css';
-import avatar from '../../assets/img/jj.jpg';
+import defaultAvatar from '../../assets/img/default-avatar.png';
 import FollowBtn from '../FollowBtn/FollowBtn';
 import commentIcon from '../../assets/img/comment-icon.png';
 
@@ -25,7 +25,7 @@ class PictureModal extends React.Component {
   };
 
   render() {
-    const { img, visible, setModalVisible } = this.props;
+    const { picture, visible, setModalVisible } = this.props;
     return (
       <Modal
         style={{ top: 30 }}
@@ -36,16 +36,16 @@ class PictureModal extends React.Component {
       >
         <div className={styles.container}>
           <div className={styles.img_wrapper}>
-            <img alt="post" src={img} />
+            <img alt="post" src={`/api/${picture.pictureUrl}`} />
           </div>
           <div className={styles.right}>
             <div className={styles.author}>
               <div className={styles.avatar_wrapper}>
-                <img alt="avatar" src={avatar} />
+                <img alt="avatar" src={picture.avatar ? `/api/${picture.avatar}` : defaultAvatar} />
               </div>
               <div className={styles.post_origin}>
-                <a className={styles.author_name}>Faker</a>
-                <p className={styles.post_time}>21:10 October 21st</p>
+                <a className={styles.author_name}>{picture.username}</a>
+                <p className={styles.post_time}>{picture.posttime}</p>
               </div>
               <FollowBtn className={styles.follow_btn} />
             </div>
@@ -55,19 +55,18 @@ class PictureModal extends React.Component {
               <Button
                 icon="heart" onClick={this.likePictureChange}
                 className={this.state.isLike ? styles.liked : styles.disliked}
-              >250</Button>
+              >{picture.likeNum}</Button>
             </div>
             <div className={styles.description}>
-              <h3>Helmcken Falls sunset</h3>
+              <h3>{picture.title}</h3>
               <div className={styles.description_content}>
-                Sunset at helmcken Falls. Helmcken Falls is a 141 m (463 ft) waterfall
-                on the Murtle River within Wells Gray
+                {picture.description}
               </div>
             </div>
             <div className={styles.comment_list}>
               <div className={styles.comment_header}>
                 <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={avatar} />
+                  <img alt="comment-avatar" src={defaultAvatar} />
                 </div>
                 <div className={styles.comment_input}>
                   <Input
@@ -78,7 +77,7 @@ class PictureModal extends React.Component {
               </div>
               <div className={styles.comment_item}>
                 <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={avatar} />
+                  <img alt="comment-avatar" src={defaultAvatar} />
                 </div>
                 <div className={styles.comment_body}>
                   <span>Faker</span>
@@ -88,7 +87,7 @@ class PictureModal extends React.Component {
               </div>
               <div className={styles.comment_item}>
                 <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={avatar} />
+                  <img alt="comment-avatar" src={defaultAvatar} />
                 </div>
                 <div className={styles.comment_body}>
                   <span>Faker</span>
@@ -98,7 +97,7 @@ class PictureModal extends React.Component {
               </div>
               <div className={styles.comment_item}>
                 <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={avatar} />
+                  <img alt="comment-avatar" src={defaultAvatar} />
                 </div>
                 <div className={styles.comment_body}>
                   <span>Faker</span>
@@ -108,7 +107,7 @@ class PictureModal extends React.Component {
               </div>
               <div className={styles.comment_item}>
                 <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={avatar} />
+                  <img alt="comment-avatar" src={defaultAvatar} />
                 </div>
                 <div className={styles.comment_body}>
                   <span>Faker</span>
@@ -118,7 +117,7 @@ class PictureModal extends React.Component {
               </div>
               <div className={styles.comment_item}>
                 <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={avatar} />
+                  <img alt="comment-avatar" src={defaultAvatar} />
                 </div>
                 <div className={styles.comment_body}>
                   <span>Faker</span>
@@ -135,7 +134,6 @@ class PictureModal extends React.Component {
 }
 
 PictureModal.propTypes = {
-  img: PropTypes.string.isRequired,
   visible: PropTypes.bool.isRequired,
   setModalVisible: PropTypes.func.isRequired,
 };

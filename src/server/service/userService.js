@@ -33,7 +33,7 @@ exports.register = (username, password, callback) => {
       callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.FAILURE,
         HttpMessage.message.user.USER_EXISTS);
     } else {    // 用户不存在，进行注册
-      sql(`insert into ${tables.user}`, [username, '', '', md5(password + MD5_SUFFIX)], 'run').then((result) => {
+      sql(`insert into ${tables.INSERT_USER}`, [username, '', '', md5(password + MD5_SUFFIX)], 'run').then((result) => {
         callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
           HttpMessage.message.user.USER_REGISTER_SUCCESS, result);
       });

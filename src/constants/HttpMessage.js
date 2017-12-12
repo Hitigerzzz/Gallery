@@ -22,6 +22,8 @@ module.exports = exports = {
       USER_LOGIN_AGAIN: 'please login again',
     },
     picture: {
+      PICTURE_UPLOAD_SUCCESS: 'upload picture successfully',
+      PICTURE_UPLOAD_FAILURE: 'upload picture unsuccessfully',
       PICTURE_GET_ALL_SUCCESS: 'get all pictures successfully',
       PICTURE_GET_ALL_EMPTY: 'user doesn\'t have picture',
     },

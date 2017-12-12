@@ -18,6 +18,7 @@ class PictureUploadModal extends React.Component {
       previewVisible: false,
       previewImage: '',
       fileList: '',
+      pictureUrl: '',
     };
   }
   handleCancel = () => this.setState({ previewVisible: false });
@@ -27,17 +28,31 @@ class PictureUploadModal extends React.Component {
       previewVisible: true,
     });
   };
-  handleChange = ({ fileList }) => this.setState({ fileList });
+  handleChange = ({ fileList }) => {
+    this.setState({ fileList });
+    if (this.state.fileList[0]) {
+      const response = this.state.fileList[0].response;
+      if (fileList.length === 1 && response) {
+        console.log('handleChange/url', response.data.pictureUrl);
+        this.setState({
+          pictureUrl: response.data.pictureUrl,
+        });
+      }
+    } else { // 删除图片
+      this.setState({
+        pictureUrl: '',
+      });
+    }
+  };
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('upload submit', values);
         const data = {
           title: values.title,
           category: values.category,
           description: values.description,
-          file: values.upload.file,
+          pictureUrl: this.state.pictureUrl,
         };
         this.props.dispatch({
           type: 'picture/uploadPicture',
@@ -65,7 +80,15 @@ class PictureUploadModal extends React.Component {
         visible={visible}
         footer={null}
         width={'50%'}
-        onCancel={() => setModalVisible(false)}
+        onCancel={() => {
+          this.setState({
+            previewVisible: false,
+            previewImage: '',
+            fileList: '',
+            pictureUrl: '',
+          });
+          setModalVisible(false);
+        }}
       >
         <Form onSubmit={this.handleSubmit} className={styles.container}>
           <div className={styles.left}>
@@ -73,7 +96,6 @@ class PictureUploadModal extends React.Component {
               rules: [{ required: true, message: 'Please upload photo!' }],
             })(
               <Upload
-                name="avatar"
                 action="/api/img/preUpload"
                 listType="picture-card"
                 fileList={fileList}

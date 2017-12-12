@@ -17,7 +17,6 @@ class Header extends React.Component {
     super(props);
     this.state = {
       mode: 'login',
-      uploadModalVisible: false,
     };
   }
 
@@ -31,6 +30,12 @@ class Header extends React.Component {
     this.setState({ loginModalVisible: visible, mode });
   };
   setUploadModalVisible = (visible) => {
+    this.props.dispatch({
+      type: 'picture/savUploadModalVisible',
+      payload: {
+        uploadModalVisible: visible,
+      },
+    });
     this.setState({ uploadModalVisible: visible });
   };
   handleLogout = () => {
@@ -124,7 +129,7 @@ class Header extends React.Component {
           mode={this.state.mode}
         />
         <PictureUploadModal
-          visible={this.state.uploadModalVisible} setModalVisible={this.setUploadModalVisible}
+          visible={this.props.uploadModalVisible} setModalVisible={this.setUploadModalVisible}
         />
       </div>
     );
@@ -133,7 +138,8 @@ class Header extends React.Component {
 
 function mapStateToProps(state) {
   const { userInfo, loginModalVisible } = state.user;
-  return { userInfo, loginModalVisible };
+  const { uploadModalVisible } = state.picture;
+  return { userInfo, loginModalVisible, uploadModalVisible };
 }
 
 export default connect(mapStateToProps)(Header);

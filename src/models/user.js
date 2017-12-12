@@ -39,7 +39,6 @@ export default {
     },
     *login({ payload: user }, { call, put, select }) {
       const response = yield call(UserService.login, user);
-      console.log('models/user/login', response.data);
       if (response.data.code === HttpMessage.result.SUCCESS) {
         // 关闭登录弹出框
         yield put({
@@ -56,7 +55,6 @@ export default {
           },
         });
         const userModel = yield select(state => state.user);
-        console.log('models/user/login/picture', userModel);
         if (userModel.isNeedRefresh) {
           yield put({
             type: 'getUserAllPictures',
@@ -77,7 +75,6 @@ export default {
     // },
     *initUserInfo({ payload }, { call, put }) {
       const response = yield call(UserService.fetchUserLoginInfo);
-      console.log('models/user/initUserInfo', response);
       if (response.data.data) {
         // 已登录，获得用户信息
         yield put({
@@ -102,7 +99,6 @@ export default {
       const userInfo = loginInfo.data.data;
       if (userInfo) { // 已登录
         const response = yield call(PictureService.getUserAllPictures, userInfo.userId);
-        console.log('models/user/getUserAllPictures/response', response);
         yield put({
           type: 'saveUserAllPictures',
           payload: {
@@ -124,13 +120,12 @@ export default {
         });
       }
     },
-    *getUserAllGalleries({ payload }, { call, put, select }) {
+    *getUserAllGalleries({ payload }, { call, put }) {
       // 判断是否已经登录
       const loginInfo = yield call(UserService.fetchUserLoginInfo);
       const userInfo = loginInfo.data.data;
       if (userInfo) {
         const response = yield call(GalleryService.getUserAllGalleries, userInfo.userId);
-        console.log('models/user/getUserAllGalleries/response', response);
         yield put({
           type: 'saveGalleries',
           payload: {

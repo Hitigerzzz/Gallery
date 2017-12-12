@@ -4,14 +4,14 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const multipart = require('connect-multiparty');
+const multer = require('multer');
 const pictureService = require('../service/pictureService');
 const { responseClient } = require('../util');
 
 const router = express.Router();
-const multipartMiddleware = multipart();
 const IMG_ROOT_PATH = path.join(__dirname, '../static/img');
 const FILE_FORMAT = 'binary';
+const upload = multer({ dest: path.join(IMG_ROOT_PATH, 'picture') });
 
 /**
  * 获得单张图片
@@ -23,21 +23,14 @@ router.get('/:type/:name', (req, res) => {
   res.end();
 });
 
-router.post('/preUpload', (req, res) => {
-  res.end();
+router.post('/preUpload', upload.array('file'), (req, res) => {
+  pictureService.preUpload(req.files[0], (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
 });
-router.post('/upload', multipartMiddleware, (req, res) => {
-  console.log('img/upload');
-  console.log(req.body);
-  console.log(req.body.file);
-  const filePath = path.join(IMG_ROOT_PATH, 'picture', 'test.jpg');
-  fs.writeFile(filePath, req.body.file, FILE_FORMAT, (err) => {
-    if (err) {
-      console.error(err);
-      res.send(err);
-    } else {
-      res.send('save successfully！');
-    }
+router.post('/upload', (req, res) => {
+  pictureService.upload(req.body, (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
   });
 });
 

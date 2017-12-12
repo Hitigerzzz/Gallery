@@ -4,9 +4,8 @@
 import React from 'react';
 import { Button } from 'antd';
 import styles from './PictureItem.css';
-import PictureModal from '../PictureDetailModal/PictureDetailModal';
-import avatar from '../../assets/img/jj.jpg';
-
+import PictureDetailModal from '../PictureDetailModal/PictureDetailModal';
+import defaultAvatar from '../../assets/img/default-avatar.png';
 
 class PictureItem extends React.Component {
   constructor(props) {
@@ -28,8 +27,9 @@ class PictureItem extends React.Component {
     const { className, picture } = this.props;
     return (
       <div className={`${styles.container} ${className}`} onClick={() => this.setModalVisible(true)}>
-        <PictureModal
-          img={`/api/${picture.pictureUrl}`} visible={this.state.modalVisible} setModalVisible={this.setModalVisible}
+        <PictureDetailModal
+          picture={picture}
+          visible={this.state.modalVisible} setModalVisible={this.setModalVisible}
         />
         <img alt="item" src={`/api/${picture.pictureUrl}`} />
         <div className={styles.info}>
@@ -37,16 +37,16 @@ class PictureItem extends React.Component {
             <Button
               icon="heart" onClick={this.likePictureChange}
               className={this.state.isLike ? styles.liked : styles.disliked}
-            >250
+            >{picture.likeNum}
             </Button>
             <Button icon="plus">Collect</Button>
           </div>
           <div className={styles.footer}>
             <div className={styles.user_info}>
               <div className={styles.avatar_wrapper}>
-                <img alt="avatar" src={avatar} />
+                <img alt="avatar" src={picture.avatar ? `/api/${picture.avatar}` : defaultAvatar} />
               </div>
-              <span className={styles.username}>Faker</span>
+              <span className={styles.username}>{picture.username}</span>
             </div>
             <Button icon="download" />
           </div>
