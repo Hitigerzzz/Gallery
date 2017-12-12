@@ -38,6 +38,7 @@ class Header extends React.Component {
     });
   };
   handleLogout = () => {
+    console.log('退出登录');
     this.props.dispatch({
       type: 'user/logout',
     });
@@ -103,8 +104,9 @@ class Header extends React.Component {
                         My profile
                       </Link>
                     </MenuItem>
-                    <MenuItem key="gallery">My gallery</MenuItem>
-                    <MenuItem key="manage">Manage photo</MenuItem>
+                    <MenuItem key="logout">
+                      <a onClick={this.handleLogout}>Logout</a>
+                    </MenuItem>
                   </MenuItemGroup>
                 </SubMenu>
                 : null

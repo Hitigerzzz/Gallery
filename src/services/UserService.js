@@ -26,14 +26,9 @@ export function register(user) {
   });
 }
 
-export function logout(user) {
+export function logout() {
   return request(`${USER_API}logout`, {
-    method: 'POST',
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
   });
 }
 

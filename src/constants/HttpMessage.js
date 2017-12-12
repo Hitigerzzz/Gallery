@@ -20,6 +20,7 @@ module.exports = exports = {
       USER_LOGIN_FAILURE: 'incorrect username or password',
       USER_LOGIN_SUCCESS: 'login successfully',
       USER_LOGIN_AGAIN: 'please login again',
+      USER_LOGOUT_SUCCESS: 'logout successfully',
     },
     picture: {
       PICTURE_UPLOAD_SUCCESS: 'upload picture successfully',

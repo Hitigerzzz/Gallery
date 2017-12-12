@@ -2,6 +2,7 @@
  * Created by Hitigerzzz on 2017/12/5.
  */
 import pathToRegexp from 'path-to-regexp';
+import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import * as UserService from '../services/UserService';
 import * as PictureService from '../services/PictureService';
@@ -79,12 +80,20 @@ export default {
         message.error(response.data.message);
       }
     },
-    // *logout({ payload }, { call, put, select }) {
-    //   const user = yield select(state => state.user);
-    //   if (user.userInfo) {
-    //     const userId = user.userInfo.userId;
-    //   }
-    // },
+    *logout({ payload }, { call, put }) {
+      const response = yield call(UserService.logout);
+      if (response.data.code === HttpMessage.result.SUCCESS) {
+        message.success(response.data.message);
+        // 清空用户信息
+        yield put({
+          type: 'saveUserLoginInfo',
+          payload: {
+            userInfo: '',
+          },
+        });
+        yield put(routerRedux.push('/'));
+      }
+    },
     *initUserInfo({ payload }, { call, put }) {
       const response = yield call(UserService.fetchUserLoginInfo);
       if (response.data.data) {

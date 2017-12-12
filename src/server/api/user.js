@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /**
  * Created by Hitigerzzz on 2017/12/3.
  */
@@ -24,6 +25,12 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.get('/logout', (req, res) => {
+  req.session.userInfo = null;
+  responseClient(res, HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+    HttpMessage.message.user.USER_LOGOUT_SUCCESS, null);
+});
+
 router.get('/userLoginInfo', (req, res) => {
   // console.log(req.session);
   const userInfo = req.session.userInfo;
@@ -33,7 +40,7 @@ router.get('/userLoginInfo', (req, res) => {
   } else {
     // console.log('user/userLoginInfo', '未登录');
     responseClient(res, HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.FAILURE,
-      HttpMessage.message.USER_LOGIN_AGAIN, null);
+      HttpMessage.message.user.USER_LOGIN_AGAIN, null);
   }
 });
 
