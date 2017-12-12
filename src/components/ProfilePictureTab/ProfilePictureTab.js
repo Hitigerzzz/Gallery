@@ -31,7 +31,15 @@ const ProfilePictureTab = ({ pictures, galleries }) => {
             }
           </div>
         </TabPane>
-        <TabPane tab="Liked" key="3">Content of tab 3</TabPane>
+        <TabPane tab="Liked" key="3">
+          <PictureColumns pictures={pictures} />
+        </TabPane>
+        <TabPane tab="Followers" key="4">
+          Followers
+        </TabPane>
+        <TabPane tab="Following" key="5">
+          Following
+        </TabPane>
       </Tabs>
     </div>
   );

@@ -9,4 +9,5 @@ module.exports = {
   GALLERY_TABLE: 'gallery',
   INSERT_GALLERY: 'gallery (title, description, userId) values(?, ?, ?)',
   GALLERY_PICTURES_TABLE: 'gallery_pictures',
+  COMMENT_TABLE: 'comment',
 };

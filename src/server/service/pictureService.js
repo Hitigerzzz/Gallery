@@ -39,17 +39,20 @@ exports.upload = (picture, callback) => {
 };
 
 exports.getUserAllPictures = (userId, callback) => {
-  const command = `SELECT * FROM ${tables.PICTURE_TABLE} WHERE userId = ?`;
+  const command = `SELECT * FROM ${tables.PICTURE_TABLE}, (SELECT userId, username, avatar FROM user) A WHERE
+  ${tables.PICTURE_TABLE}.userId = ? AND
+  ${tables.PICTURE_TABLE}.userId = A.userId`;
   sql(command, [userId], 'all').then((data) => {
     if (data && data.length > 0) {
       const promises = [];
       const length = data.length;
-      const SQL_FIND_USER = `SELECT * FROM ${tables.USER_TABLE} WHERE userId = ?`;
+      // const SQL_FIND_USER = `SELECT * FROM ${tables.USER_TABLE} WHERE userId = ?`;
+      const SQL_FIND_COMMENT = `SELECT * FROM ${tables.COMMENT_TABLE}, ${tables.USER_TABLE} WHERE ${tables.COMMENT_TABLE}.pictureId = ?
+      AND ${tables.COMMENT_TABLE}.userId = ${tables.USER_TABLE}.userId ORDER BY commentTime DESC`;
       for (let i = 0; i < length; i += 1) { /* eslint-disable prefer-const */
         const picture = data[i];
-        let promise = sql(SQL_FIND_USER, [picture.userId], 'get').then((user) => {
-          picture.username = user.username;
-          picture.avatar = user.avatar;
+        let promise = sql(SQL_FIND_COMMENT, [picture.pictureId], 'all').then((comments) => {
+          picture.comments = comments;
           return picture;
         });
         promises.push(promise);
@@ -73,11 +76,23 @@ exports.getAllPictures = (callback) => {
   WHERE ${tables.PICTURE_TABLE}.userId = ${tables.USER_TABLE}.userId`;
   sql(command, [], 'all').then((data) => {
     if (data && data.length > 0) {
-      for (let i = 0; i < data.length; i += 1) {
-        delete data[i].password;
+      const promises = [];
+      const length = data.length;
+      const SQL_FIND_COMMENT = `SELECT * FROM ${tables.COMMENT_TABLE}, ${tables.USER_TABLE} WHERE ${tables.COMMENT_TABLE}.pictureId = ?
+      AND ${tables.COMMENT_TABLE}.userId = ${tables.USER_TABLE}.userId ORDER BY commentTime DESC`;
+      for (let i = 0; i < length; i += 1) { /* eslint-disable prefer-const */
+        const picture = data[i];
+        delete picture.password;
+        let promise = sql(SQL_FIND_COMMENT, [picture.pictureId], 'all').then((comments) => {
+          picture.comments = comments;
+          return picture;
+        });
+        promises.push(promise);
       }
-      callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
-          HttpMessage.message.picture.PICTURE_GET_ALL_SUCCESS, data);
+      Promise.all(promises).then((pictures) => {
+        callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+          HttpMessage.message.picture.PICTURE_GET_ALL_SUCCESS, pictures);
+      });
     } else if (data && data.length === 0) {
       callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.FAILURE,
         HttpMessage.message.picture.PICTURE_GET_ALL_EMPTY, data);

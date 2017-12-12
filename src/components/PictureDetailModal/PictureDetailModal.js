@@ -75,56 +75,27 @@ class PictureModal extends React.Component {
                   />
                 </div>
               </div>
-              <div className={styles.comment_item}>
-                <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={defaultAvatar} />
-                </div>
-                <div className={styles.comment_body}>
-                  <span>Faker</span>
-                  <p>Outstanding photograph my friend! Great colors as always!</p>
-                  <div>2days ago</div>
-                </div>
-              </div>
-              <div className={styles.comment_item}>
-                <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={defaultAvatar} />
-                </div>
-                <div className={styles.comment_body}>
-                  <span>Faker</span>
-                  <p>Outstanding photograph my friend! Great colors as always!</p>
-                  <div>2days ago</div>
-                </div>
-              </div>
-              <div className={styles.comment_item}>
-                <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={defaultAvatar} />
-                </div>
-                <div className={styles.comment_body}>
-                  <span>Faker</span>
-                  <p>Outstanding photograph my friend! Great colors as always!</p>
-                  <div>2days ago</div>
-                </div>
-              </div>
-              <div className={styles.comment_item}>
-                <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={defaultAvatar} />
-                </div>
-                <div className={styles.comment_body}>
-                  <span>Faker</span>
-                  <p>Outstanding photograph my friend! Great colors as always!</p>
-                  <div>2days ago</div>
-                </div>
-              </div>
-              <div className={styles.comment_item}>
-                <div className={styles.comment_avatar_wrapper}>
-                  <img alt="comment-avatar" src={defaultAvatar} />
-                </div>
-                <div className={styles.comment_body}>
-                  <span>Faker</span>
-                  <p>Outstanding photograph my friend! Great colors as always!</p>
-                  <div>2days ago</div>
-                </div>
-              </div>
+              {
+                picture.comments ?
+                  (picture.comments.length > 0 ?
+                  picture.comments.map((comment) => {
+                    return (
+                      <div className={styles.comment_item} key={comment.commentId}>
+                        <div className={styles.comment_avatar_wrapper}>
+                          <img alt="comment-avatar" src={comment.avatar ? `/api/${comment.avatar}` : defaultAvatar} />
+                        </div>
+                        <div className={styles.comment_body}>
+                          <span>{comment.username}</span>
+                          <p>{comment.commentContent}</p>
+                          <div>{comment.commentTime}</div>
+                        </div>
+                      </div>
+                    );
+                  }) : <div>No comment!</div>
+                  )
+                  :
+                  <div>No comment!</div>
+              }
             </div>
           </div>
         </div>
