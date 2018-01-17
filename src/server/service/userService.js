@@ -4,7 +4,7 @@
 const sql = require('../DBHelper').sql;
 const tables = require('../tables');
 const HttpMessage = require('../../constants/HttpMessage');
-const { md5, MD5_SUFFIX } = require('../util');
+const {md5, MD5_SUFFIX} = require('../util');
 
 exports.login = (username, password, req, callback) => {
   sql(`select * from ${tables.USER_TABLE} where username = ? and password = ?`, [username, md5(password + MD5_SUFFIX)], 'get').then((data) => {
@@ -47,8 +47,31 @@ exports.register = (username, password, callback) => {
 exports.follow = (followerId, followingId, callback) => {
   const SQL_INSERT_FOLLOW = `INSERT INTO ${tables.INSERT_FOLLOW}`;
   sql(SQL_INSERT_FOLLOW, [followerId, followingId], 'run').then((result) => {
-    callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
-      HttpMessage.message.user.USER_FOLLOW_SUCCESS, result);
+    const SQL_UPDATE_ING = `UPDATE ${tables.USER_TABLE} SET followingNum = followingNum + 1 WHERE userId = ?`;
+    sql(SQL_UPDATE_ING, followerId, 'run').then((data) => {
+      const SQL_UPDATE_ER = `UPDATE ${tables.USER_TABLE} SET followerNum = followerNum + 1 WHERE userId = ?`;
+      sql(SQL_UPDATE_ER, followingId, 'run').then((data1) => {
+        callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+          HttpMessage.message.user.USER_FOLLOW_SUCCESS, data1);
+      });
+    });
+  }).catch((err) => {
+    callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
+      HttpMessage.message.server.SERVER_ERROR, err);
+  });
+};
+
+exports.unfollow = (followerId, followingId, callback) => {
+  const SQL_INSERT_FOLLOW = `DELETE FROM ${tables.FOLLOW_TABLE} WHERE followerId = ? AND followingId = ?`;
+  sql(SQL_INSERT_FOLLOW, [followerId, followingId], 'run').then((result) => {
+    const SQL_UPDATE_ING = `UPDATE ${tables.USER_TABLE} SET followingNum = followingNum - 1 WHERE userId = ?`;
+    sql(SQL_UPDATE_ING, followerId, 'run').then((data) => {
+      const SQL_UPDATE_ER = `UPDATE ${tables.USER_TABLE} SET followerNum = followerNum - 1 WHERE userId = ?`;
+      sql(SQL_UPDATE_ER, followingId, 'run').then((data1) => {
+        callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS,
+          HttpMessage.message.user.USER_UNFOLLOW_SUCCESS, data1);
+      });
+    });
   }).catch((err) => {
     callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
       HttpMessage.message.server.SERVER_ERROR, err);
@@ -66,3 +89,13 @@ exports.getFollowing = (userId, callback) => {
       HttpMessage.message.server.SERVER_ERROR, err);
   });
 };
+
+exports.getUserInfo = (userId, callback) => {
+  const SQL = `SELECT * from ${tables.USER_TABLE} WHERE userId = ?`;
+  sql(SQL, [userId], 'get').then((result) => {
+    callback(HttpMessage.status.CLIENT_SUCCESS, HttpMessage.result.SUCCESS, '', result);
+  }).catch((err) => {
+    callback(HttpMessage.status.INTERNAL_SERVER_ERROR, HttpMessage.result.ERROR,
+      HttpMessage.message.server.SERVER_ERROR, err);
+  });
+}

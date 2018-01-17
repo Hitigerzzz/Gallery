@@ -204,14 +204,47 @@ export default {
       const userInfo = loginInfo.data.data;
       if (userInfo) {
         const followerId = userInfo.userId;
+        if (followerId === followingId) {
+          message.error('can\'t follow yourself');
+          return;
+        }
         const data = {
           followerId,
           followingId,
         };
         const response = yield call(UserService.follow, data);
         if (response.data.code === HttpMessage.result.SUCCESS) {
-          // 关闭新建弹出框
-          message.success(response.data.message);
+          yield put({
+            type: 'getFollowing',
+          });
+          yield put({
+            type: 'getUserInfo',
+          });
+        }
+      }
+    },
+    *unfollow({ payload: { followingId } }, { call, put }) {
+      // 判断是否已经登录
+      const loginInfo = yield call(UserService.fetchUserLoginInfo);
+      const userInfo = loginInfo.data.data;
+      if (userInfo) {
+        const followerId = userInfo.userId;
+        if (followerId === followingId) {
+          message.error('can\'t unfollow yourself');
+          return;
+        }
+        const data = {
+          followerId,
+          followingId,
+        };
+        const response = yield call(UserService.unfollow, data);
+        if (response.data.code === HttpMessage.result.SUCCESS) {
+          yield put({
+            type: 'getFollowing',
+          });
+          yield put({
+            type: 'getUserInfo',
+          });
         }
       }
     },
@@ -227,6 +260,23 @@ export default {
             type: 'saveFollowing',
             payload: {
               following: response.data.data,
+            },
+          });
+        }
+      }
+    },
+    *getUserInfo({ payload }, { call, put }) {
+      // 判断是否已经登录
+      const loginInfo = yield call(UserService.fetchUserLoginInfo);
+      const userInfo = loginInfo.data.data;
+      if (userInfo) {
+        const userId = userInfo.userId;
+        const response = yield call(UserService.getUserInfo, userId);
+        if (response.data.code === HttpMessage.result.SUCCESS) {
+          yield put({
+            type: 'saveUserLoginInfo',
+            payload: {
+              userInfo: response.data.data,
             },
           });
         }

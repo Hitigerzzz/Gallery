@@ -44,10 +44,26 @@ router.get('/userLoginInfo', (req, res) => {
   }
 });
 
+router.get('/userInfo', (req, res) => {
+  // console.log(req.session);
+  const userId = req.query.userId;
+  userService.getUserInfo(userId, (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
+});
+
 router.post('/follow', (req, res) => {
   const followerId = req.body.followerId;
   const followingId = req.body.followingId;
   userService.follow(followerId, followingId, (httpCode, code, message, data) => {
+    responseClient(res, httpCode, code, message, data);
+  });
+});
+
+router.post('/unfollow', (req, res) => {
+  const followerId = req.body.followerId;
+  const followingId = req.body.followingId;
+  userService.unfollow(followerId, followingId, (httpCode, code, message, data) => {
     responseClient(res, httpCode, code, message, data);
   });
 });

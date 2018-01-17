@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /**
  * Created by Hitigerzzz on 2017/12/12.
  */
@@ -10,14 +11,14 @@ class FollowingItem extends React.Component {
   render() {
     const { following, className } = this.props;
     return (
-      <div className={`${styles.container} ${className}`} onClick={() => this.setModalVisible(true)}>
+      <div className={`${styles.container} ${className}`}>
         <div className={styles.info}>
           <div className={styles.avatar_wrapper}>
             <img alt="avatar" src={following.avatar ? `/api/${following.avatar}` : defaultAvatar} />
           </div>
           <span className={styles.username}>{following.username}</span>
         </div>
-        <FollowBtn />
+        <FollowBtn isFollowing={true} followingId={following.followingId} />
       </div>
     );
   }

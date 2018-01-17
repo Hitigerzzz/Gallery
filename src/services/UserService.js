@@ -51,8 +51,24 @@ export function follow(data) {
   });
 }
 
+export function unfollow(data) {
+  return request(`${USER_API}unfollow`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+}
+
 export function getFollowing(userId) {
   return request(`${USER_API}getFollowing?userId=${userId}`, {
+    credentials: 'include',
+  });
+}
+
+export function getUserInfo(userId) {
+  return request(`${USER_API}userInfo?userId=${userId}`, {
     credentials: 'include',
   });
 }

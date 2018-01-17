@@ -2,6 +2,7 @@
  * Created by Hitigerzzz on 2017/11/9.
  */
 import React from 'react';
+import { connect } from 'dva';
 import { Button } from 'antd';
 import styles from './FollowBtn.css';
 
@@ -9,7 +10,7 @@ class FollowBtn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFollowing: false,
+      isFollowing: this.props.isFollowing || false,
     };
   }
 
@@ -20,6 +21,12 @@ class FollowBtn extends React.Component {
     this.setState({
       isFollowing: true,
     });
+    this.props.dispatch({
+      type: 'user/follow',
+      payload: {
+        followingId: this.props.followingId,
+      },
+    });
   };
   /**
    * 取消关注
@@ -27,6 +34,12 @@ class FollowBtn extends React.Component {
   unfollowAuthor = () => {
     this.setState({
       isFollowing: false,
+    });
+    this.props.dispatch({
+      type: 'user/unfollow',
+      payload: {
+        followingId: this.props.followingId,
+      },
     });
   };
   render() {
@@ -44,4 +57,4 @@ class FollowBtn extends React.Component {
   }
 }
 
-export default FollowBtn;
+export default connect()(FollowBtn);

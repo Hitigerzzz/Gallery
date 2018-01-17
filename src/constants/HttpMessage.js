@@ -22,6 +22,7 @@ module.exports = exports = {
       USER_LOGIN_AGAIN: 'please login again',
       USER_LOGOUT_SUCCESS: 'logout successfully',
       USER_FOLLOW_SUCCESS: 'follow successfully',
+      USER_UNFOLLOW_SUCCESS: 'unfollow successfully',
     },
     picture: {
       PICTURE_UPLOAD_SUCCESS: 'upload picture successfully',

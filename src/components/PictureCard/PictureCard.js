@@ -41,7 +41,7 @@ class PictureCard extends React.Component {
             <a className={styles.author_name}>{picture.username}</a>
             <p className={styles.post_time}>{picture.posttime}</p>
           </div>
-          <FollowBtn className={styles.follow_btn} />
+          <FollowBtn className={styles.follow_btn} followingId={picture.userId} />
         </div>
         <a className={styles.body} onClick={() => this.setModalVisible(true)}>
           <img alt="post" src={`/api/${picture.pictureUrl}`} />
