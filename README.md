@@ -30,11 +30,11 @@ Gallery 旨在帮助用户上传、下载摄影图片，给予用户分享图片
 
 图片信息界面
 
-![图片信息](F:\workspace\React\Gallery\docs\img\图片信息.png)                   
+![图片信息](/docs/img/图片信息.png)                   
 
 图片详情界面
 
- ![图片详情](F:\workspace\React\Gallery\docs\img\图片详情.png)
+ ![图片详情](/docs/img/图片详情.png)
 
 个人信息界面
 
