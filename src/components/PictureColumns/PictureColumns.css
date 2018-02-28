@@ -1,0 +1,42 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.photos_body {
+  display: flex;
+  justify-content: space-between; }
+  .photos_body .column {
+    width: calc((100% - 24px * 2) / 3); }
+    .photos_body .column .item {
+      margin-bottom: 24px; }
+
+/*# sourceMappingURL=PictureColumns.css.map */

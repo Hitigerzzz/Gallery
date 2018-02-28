@@ -1,0 +1,140 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.header {
+  background-color: #FFF;
+  border-bottom: 1px solid #DDDDDD;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 999; }
+  .header .menu {
+    border-bottom: none; }
+    .header .menu :global .ant-menu-item {
+      border-bottom: none;
+      height: 50px;
+      line-height: 50px; }
+      .header .menu :global .ant-menu-item a {
+        color: #808080;
+        font-size: 14px;
+        font-family: "Menlo"; }
+      .header .menu :global .ant-menu-item.ant-menu-item-active {
+        border-bottom: none;
+        background-color: #f7f8fb; }
+      .header .menu :global .ant-menu-item.ant-menu-item-selected {
+        border-bottom: none;
+        background-color: #d8cce5; }
+  .header .right {
+    display: flex;
+    align-items: center; }
+    .header .right .submenu {
+      display: flex;
+      align-self: center;
+      border-bottom: none;
+      align-items: center; }
+      .header .right .submenu .avatar {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%; }
+      .header .right .submenu :global .ant-menu-submenu-title {
+        display: flex;
+        align-items: center; }
+        .header .right .submenu :global .ant-menu-submenu-title a {
+          height: 25px;
+          line-height: 25px; }
+      .header .right .submenu :global .ant-menu-sub {
+        top: 35px;
+        left: -80px; }
+        .header .right .submenu :global .ant-menu-sub:before {
+          z-index: 55;
+          content: '';
+          display: block;
+          position: absolute;
+          top: -7px;
+          right: 10px;
+          background-color: white;
+          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.08);
+          width: 14px;
+          height: 14px;
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          -o-transform: rotate(45deg);
+          transform: rotate(45deg); }
+        .header .right .submenu :global .ant-menu-sub:after {
+          z-index: 99;
+          content: '';
+          display: block;
+          position: absolute;
+          top: -6px;
+          right: 8px;
+          background-color: white;
+          box-shadow: none;
+          border: none;
+          width: 18px;
+          height: 18px;
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          -o-transform: rotate(45deg);
+          transform: rotate(45deg); }
+    .header .right .action_button {
+      display: flex;
+      align-items: center; }
+    .header .right .login_button {
+      font-size: 14px;
+      color: #808080;
+      font-weight: 400;
+      height: 30px;
+      line-height: 30px;
+      border: none;
+      background-color: transparent;
+      opacity: 1;
+      height: 50px;
+      line-height: 50px; }
+      .header .right .login_button:hover {
+        opacity: 0.8; }
+    .header .right .upload_button {
+      background-image: linear-gradient(to right bottom, rgba(159, 88, 150, 0) 0, rgba(159, 88, 150, 0.6) 100%);
+      height: 50px;
+      line-height: 50px;
+      border: none;
+      border-radius: 0;
+      font-size: 14px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      vertical-align: middle; }
+
+/*# sourceMappingURL=Header.css.map */

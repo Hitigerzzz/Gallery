@@ -1,0 +1,116 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.modal {
+  text-align: center;
+  white-space: nowrap; }
+  .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0; }
+  .modal :global .ant-modal {
+    display: inline-block;
+    vertical-align: middle;
+    top: 20px; }
+  .modal .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 20px;
+    background-color: #f7f8fb; }
+    .modal .form h1 {
+      font-size: 26px;
+      color: #5D5D5D;
+      font-weight: 700;
+      margin-bottom: 30px; }
+    .modal .form h3 {
+      font-size: 14px;
+      color: #79589f;
+      font-weight: 500;
+      margin-bottom: 10px; }
+    .modal .form :global .ant-form-item {
+      width: 100%; }
+      .modal .form :global .ant-form-item .ant-form-item-control {
+        width: 100%;
+        line-height: 45px; }
+        .modal .form :global .ant-form-item .ant-form-item-control .ant-input-lg {
+          height: 45px;
+          font-size: 14px; }
+      .modal .form :global .ant-form-item textarea {
+        resize: none;
+        font-size: 14px; }
+    .modal .form .form_actions {
+      margin-top: 24px;
+      align-self: flex-end; }
+      .modal .form .form_actions .form_button {
+        background-image: linear-gradient(to right bottom, rgba(159, 88, 150, 0) 0, rgba(159, 88, 150, 0.6) 100%);
+        font-weight: 400;
+        border-radius: 5px;
+        border: none;
+        font-size: 18px;
+        height: 45px;
+        line-height: 45px;
+        font-size: 14px;
+        height: 30px;
+        line-height: 30px;
+        margin-left: 24px; }
+      .modal .form .form_actions #cancel_button {
+        font-size: 14px;
+        color: #808080;
+        font-weight: 400;
+        height: 30px;
+        line-height: 30px;
+        border: none;
+        background-color: transparent;
+        opacity: 1; }
+        .modal .form .form_actions #cancel_button:hover {
+          opacity: 0.8; }
+      .modal .form .form_actions #delete_button {
+        font-size: 14px;
+        color: #808080;
+        font-weight: 400;
+        height: 30px;
+        line-height: 30px;
+        border: none;
+        background-color: transparent; }
+        .modal .form .form_actions #delete_button:hover {
+          color: #ff6666; }
+        .modal .form .form_actions #delete_button:focus {
+          color: #ff9999; }
+        .modal .form .form_actions #delete_button:after {
+          display: none; }
+
+/*# sourceMappingURL=GalleryEditModal.css.map */

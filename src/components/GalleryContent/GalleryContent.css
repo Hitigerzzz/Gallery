@@ -1,0 +1,44 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.container {
+  width: 85%;
+  margin: 0 auto; }
+  .container h3 {
+    font-size: 14px;
+    color: #79589f;
+    margin-bottom: 16px;
+    line-height: 32px;
+    font-weight: 500; }
+
+/*# sourceMappingURL=GalleryContent.css.map */

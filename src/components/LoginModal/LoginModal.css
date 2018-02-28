@@ -1,0 +1,100 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.modal {
+  text-align: center;
+  white-space: nowrap; }
+  .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0; }
+  .modal :global .ant-modal {
+    display: inline-block;
+    vertical-align: middle;
+    top: 20px; }
+  .modal .flip_box {
+    position: relative;
+    height: auto; }
+    .modal .flip_box .login {
+      width: 100%; }
+    .modal .flip_box .register {
+      width: 100%; }
+    .modal .flip_box .visible {
+      display: block; }
+    .modal .flip_box .invisible {
+      display: none; }
+    .modal .flip_box :global .ant-form-item-control {
+      line-height: 45px; }
+      .modal .flip_box :global .ant-form-item-control .ant-input-lg {
+        height: 45px;
+        font-size: 14px;
+        padding-left: 30px; }
+    .modal .flip_box .form {
+      max-width: 300px;
+      margin: 0 auto; }
+      .modal .flip_box .form h3 {
+        font-size: 24px;
+        color: #79589f;
+        padding: 40px 0; }
+      .modal .flip_box .form .form_button {
+        background-image: linear-gradient(to right bottom, rgba(159, 88, 150, 0) 0, rgba(159, 88, 150, 0.6) 100%);
+        font-weight: 400;
+        border-radius: 5px;
+        border: none;
+        font-size: 18px;
+        height: 45px;
+        line-height: 45px;
+        width: 100%; }
+    .modal .flip_box .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 65px;
+      height: 65px;
+      width: 100%;
+      background-color: #F9F9F9;
+      font-size: 14px;
+      line-height: 65px;
+      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 4px; }
+      .modal .flip_box .footer a {
+        color: #79589f;
+        text-decoration: underline;
+        margin-left: 8px; }
+      .modal .flip_box .footer span {
+        color: #B3B3B3;
+        text-decoration: none; }
+
+/*# sourceMappingURL=LoginModal.css.map */

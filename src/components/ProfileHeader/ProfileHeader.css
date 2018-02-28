@@ -1,0 +1,64 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0; }
+  .container .avatar_wrapper {
+    width: 150px;
+    height: 150px;
+    margin-right: 60px; }
+    .container .avatar_wrapper img {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      border-radius: 50%; }
+  .container .user_info {
+    display: flex;
+    flex-direction: column; }
+    .container .user_info .first {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 15px; }
+      .container .user_info .first .username {
+        line-height: 1;
+        font-size: 40px;
+        font-weight: 700;
+        margin-right: 24px;
+        color: #5D5D5D; }
+    .container .user_info .second {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #B3B3B3;
+      font-weight: 500;
+      margin-bottom: 8px; }
+      .container .user_info .second div:not(:last-child) {
+        margin-right: 12px; }
+        .container .user_info .second div:not(:last-child):hover {
+          color: #79589f;
+          cursor: pointer; }
+      .container .user_info .second div:last-child i {
+        margin-right: 4px; }
+    .container .user_info .description {
+      color: #5D5D5D;
+      font-size: 14px; }
+
+/*# sourceMappingURL=ProfileHeader.css.map */

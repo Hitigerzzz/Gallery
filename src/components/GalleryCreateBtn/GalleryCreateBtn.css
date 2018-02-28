@@ -1,0 +1,51 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 3px;
+  height: 380px; }
+  .container:hover {
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.08);
+    cursor: pointer; }
+  .container p {
+    color: #79589f;
+    font-size: 20px;
+    margin-top: 12px; }
+
+/*# sourceMappingURL=GalleryCreateBtn.css.map */

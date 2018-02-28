@@ -1,0 +1,110 @@
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+/*
+ * Fonts
+ */
+/*
+ * Colors
+ */
+/*
+ * border
+ */
+/*
+ * box-shadow
+ */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Pingfang SC", "Open Sans", "Lantinghei SC", "Microsoft Yahei Light", "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  text-decoration: none;
+  list-style: none; }
+
+.container {
+  width: 100%;
+  position: relative;
+  line-height: 0.8; }
+  .container img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed; }
+  .container .info {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0, transparent 40%, transparent 60%, rgba(0, 0, 0, 0.3));
+    opacity: 0;
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -ms-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .container .info button {
+      border: none;
+      margin-left: 10px;
+      background-color: #FFF;
+      opacity: 0.8; }
+      .container .info button:hover {
+        border: none;
+        opacity: 1; }
+    .container .info .buttons {
+      padding: 14px 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center; }
+      .container .info .buttons .liked {
+        background-color: #ff6666;
+        color: #FFF; }
+      .container .info .buttons .disliked i {
+        color: #ff6666; }
+      .container .info .buttons .disliked span {
+        color: #5D5D5D; }
+    .container .info .footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 20px; }
+      .container .info .footer .user_info {
+        display: flex;
+        align-items: center; }
+        .container .info .footer .user_info .avatar_wrapper {
+          width: 32px;
+          height: 32px;
+          margin-right: 12px; }
+          .container .info .footer .user_info .avatar_wrapper img {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            border-radius: 50%; }
+        .container .info .footer .user_info .username {
+          color: #DDDDDD;
+          font-size: 14px; }
+          .container .info .footer .user_info .username:hover {
+            color: #FFF; }
+  .container:hover .info {
+    opacity: 1; }
+  .container:hover {
+    cursor: zoom-in; }
+
+/*# sourceMappingURL=PictureItem.css.map */
